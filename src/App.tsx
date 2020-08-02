@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   HashRouter as Router,
   Switch,
@@ -7,6 +7,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import styled from 'styled-components';
+import Nav from './components/Nav';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -17,19 +18,8 @@ const Main = styled.div`
   flex-grow: 1;
   overflow: auto;
 `;
-const Nav = styled.nav`
-  border: 1px solid blue;
-  > ul {
-    display:flex;
-    > li{
-      width: 33.3333%;
-      text-align:center;
-      padding: 16px;
-    }
-  }
-`;
 
-export default function App() {
+function App() {
   return (
     <Router>
       <Wrapper>
@@ -50,35 +40,28 @@ export default function App() {
             </Route>
           </Switch>
         </Main>
-        <Nav>
-          <ul>
-            <li>
-              <Link to="/tags">标签页</Link>
-            </li>
-            <li>
-              <Link to="/money">记账页</Link>
-            </li>
-            <li>
-              <Link to="/statistics">统计页</Link>
-            </li>
-          </ul>
-        </Nav>
+        <Nav />
       </Wrapper>
     </Router>
   );
 }
 
-function Tags() {
-  return <h2>Route</h2>;
-}
-
-function Money() {
-  return <h2>Money</h2>;
+function NoMatch() {
+  return (
+    <div>页面不存在，你丫输错地址了吧！</div>
+  );
 }
 
 function Statistics() {
-  return <h2>Statistics</h2>;
+  return <h2>统计页面</h2>;
 }
-function NoMatch() {
-  return <div>当前页面不存在</div>
+
+function Tags() {
+  return <h2>标签页面</h2>;
 }
+
+function Money() {
+  return <h2>记账页面</h2>;
+}
+
+export default App;

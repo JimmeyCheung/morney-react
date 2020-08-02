@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "node-sass": "npm:dart-sass@1.25.0"
+    "node-sass": "npm:dart-sass@1.25.0",
+    "svg-sprite-loader": "^5.0.0"
   }
 }
