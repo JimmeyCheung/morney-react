@@ -1,16 +1,27 @@
 import React from 'react';
-
-let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
-try { importAll(require.context('icons', true, /\.svg$/)); } catch (error) { console.log(error); }
+import styled from 'styled-components';
 
 type Props = {
     name: string
 }
+const SvgWrapper = styled.div`
+    .icon{
+        width:1em;
+        height:1em;
+        fill:currentColor;
+    }
+`;
+
+let importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
+try { importAll(require.context('icons', true, /\.svg$/)); } catch (error) { console.log(error); }
+
 const Icon = (props: Props) => {
     return (
-        <svg className="icon">
-            <use xlinkHref={'#' + props.name} />
-        </svg>
+        <SvgWrapper>
+            <svg className="icon">
+                <use xlinkHref={'#' + props.name} />
+            </svg>
+        </SvgWrapper>
     );
 }
 export default Icon;
