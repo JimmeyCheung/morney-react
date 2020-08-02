@@ -1,6 +1,6 @@
 import React from 'react';
-import Nav from './Nav';
-import Layout from './Layout';
+import Nav from '../components/Nav';
+import Layout from '../components/Layout';
 const Money = () => {
     return (
         <div>

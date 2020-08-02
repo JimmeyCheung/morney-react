@@ -6,10 +6,10 @@ import {
   Redirect
 } from 'react-router-dom';
 import Layout from 'components/Layout';
-import Tags from 'components/tags';
-import Statistics from 'components/Statistics';
+import Tags from 'views/tags';
+import Statistics from 'views/Statistics';
 import NoMatch from 'components/NoMatch';
-import Money from 'components/Money';
+import Money from 'views/Money';
 
 
 function App() {
