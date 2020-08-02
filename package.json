@@ -92,6 +92,7 @@
     ]
   },
   "devDependencies": {
+    "@types/webpack-env": "1.15.2",
     "node-sass": "npm:dart-sass@1.25.0",
     "svg": "^0.1.0",
     "svg-loader": "^0.0.2",
