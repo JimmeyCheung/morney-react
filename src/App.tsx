@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
   HashRouter as Router,
   Switch,
   Route,
-  Redirect
-} from 'react-router-dom';
-import styled from 'styled-components';
-import Tags from 'views/tags';
-import Statistics from 'views/Statistics';
-import NoMatch from 'components/NoMatch';
-import Money from 'views/Money';
+  Redirect,
+} from "react-router-dom";
+import styled from "styled-components";
+import Tags from "views/Tags";
+import Statistics from "views/Statistics";
+import NoMatch from "components/NoMatch";
+import Money from "views/Money";
 
 const AppWrapper = styled.div`
   color: #333;
