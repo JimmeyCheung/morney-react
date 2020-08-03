@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 type Props = {
-    name: string
+    name?: string
 }
 const SvgWrapper = styled.div`
     .icon{
@@ -19,7 +19,7 @@ const Icon = (props: Props) => {
     return (
         <SvgWrapper>
             <svg className="icon">
-                <use xlinkHref={'#' + props.name} />
+                {props.name && <use xlinkHref={'#' + props.name} />}
             </svg>
         </SvgWrapper>
     );
