@@ -68,7 +68,6 @@ const TagsSection: React.FC<Props> = (props) => {
       </ol>
       <button
         onClick={() => {
-          console.log("2");
           addTag();
         }}
       >
