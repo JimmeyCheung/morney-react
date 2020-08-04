@@ -11,13 +11,16 @@ const NumberPadSection: React.FC<Props> = (props) => {
   const output = props.value.toString();
   const setOutput = (output: string) => {
     let value;
+    console.log(output);
     if (output.length > 16) {
       value = parseFloat(output.slice(0, 16));
     } else if (output.length === 0) {
       value = 0;
     } else {
       value = parseFloat(output);
+      console.log(value);
     }
+    props.onChange(value);
   };
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
