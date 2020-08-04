@@ -25,26 +25,26 @@ const TagList = styled.ol`
   }
 `;
 const Tags = () => {
-  const { tags, addTag } = useTags();
-  return (
-    <Layout>
-      <TagList>
-        {tags.map((tag) => (
-          <li key={tag.id}>
-            <Link to={"/tags/" + tag.id}>
-              <span className="oneLine">{tag.name}</span>
-              <Icon name="right" />
-            </Link>
-          </li>
-        ))}
-      </TagList>
-      <Center>
-        <Space />
-        <Space />
-        <Space />
-        <Button onClick={addTag}>新增标签</Button>
-      </Center>
-    </Layout>
-  );
+    const { tags, addTag } = useTags();
+    return (
+        <Layout>
+            <TagList>
+                {tags.map((tag) => (
+                    <li key={tag.id}>
+                        <Link to={"/tags/" + tag.id}>
+                            <span className="oneLine">{tag.name}</span>
+                            <Icon name="right" />
+                        </Link>
+                    </li>
+                ))}
+            </TagList>
+            <Center>
+                <Space />
+                <Space />
+                <Space />
+                <Button onClick={addTag}>新增标签</Button>
+            </Center>
+        </Layout>
+    );
 };
 export default Tags;
