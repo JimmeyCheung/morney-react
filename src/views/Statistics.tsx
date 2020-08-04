@@ -58,13 +58,13 @@ const Statistics = () => {
         />
       </CategoryWrapper>
 
-      {array.map(([date, records]) => (
-        <div>
+      {array.map(([date, records], i) => (
+        <div key={i}>
           <Header>{date}</Header>
           <div>
-            {records.map((r) => {
+            {records.map((r, rIndex) => {
               return (
-                <Item>
+                <Item key={rIndex}>
                   <div className="tags oneLine">
                     {r.tagIds
                       .map((tagId) => <span key={tagId}>{getName(tagId)}</span>)
