@@ -71,7 +71,7 @@ const TagsSection: React.FC<Props> = (props) => {
           addTag();
         }}
       >
-        新增标签2
+        新增标签
       </button>
     </Wrapper>
   );

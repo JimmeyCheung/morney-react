@@ -36,8 +36,9 @@ const useTags = () => {
   const updateTag = (id: number, { name }: { name: string }) => {
     setTags(tags.map((tag) => (tag.id === id ? { id, name: name } : tag)));
   };
-  const deleteTag = (id: number) => {
+  const deleteTag = (id: number): boolean => {
     setTags(tags.filter((tag) => tag.id !== id));
+    return true;
   };
   const addTag = () => {
     const tagName = window.prompt("新标签的名称为");

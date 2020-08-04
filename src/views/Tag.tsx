@@ -27,6 +27,10 @@ const InputWrapper = styled.div`
 `;
 const Tag: React.FC = () => {
   const { findTag, updateTag, deleteTag } = useTags();
+  const history = useHistory();
+  const onClickBack = () => {
+    history.goBack();
+  };
   let { id: idString } = useParams<Params>();
   const tag = findTag(parseInt(idString));
   const tagContent = (tag: { id: number; name: string }) => (
@@ -48,7 +52,10 @@ const Tag: React.FC = () => {
         <Space />
         <Button
           onClick={() => {
-            deleteTag(tag.id);
+            if (deleteTag(tag.id)) {
+              alert("删除成功");
+              history.goBack();
+            }
           }}
         >
           删除标签
@@ -56,11 +63,6 @@ const Tag: React.FC = () => {
       </Center>
     </div>
   );
-  const history = useHistory();
-  const onClickBack = () => {
-    history.goBack();
-  };
-
   return (
     <Layout>
       <Topbar>
@@ -68,8 +70,7 @@ const Tag: React.FC = () => {
         <span>编辑标签</span>
         <Icon />
       </Topbar>
-
-      {tag ? tagContent(tag) : <Center>tag 不存在</Center>}
+      {tag && tagContent(tag)}
     </Layout>
   );
 };
