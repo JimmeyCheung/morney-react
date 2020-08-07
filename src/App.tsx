@@ -11,6 +11,8 @@ import Statistics from "views/Statistics";
 import NoMatch from "components/NoMatch";
 import Money from "views/Money";
 import { Tag } from "./views/Tag";
+import { ConfigProvider } from "antd";
+import zhCN from "antd/es/locale/zh_CN";
 
 const AppWrapper = styled.div`
   color: #333;
@@ -18,28 +20,30 @@ const AppWrapper = styled.div`
 
 function App() {
   return (
-    <AppWrapper>
-      <Router>
-        <Switch>
-          <Route exact path="/tags">
-            <Tags />
-          </Route>
-          <Route exact path="/money">
-            <Money />
-          </Route>
-          <Route exact path="/statistics">
-            <Statistics />
-          </Route>
-          <Redirect exact from="/" to="/money" />
-          <Route exact path="/tags/:id">
-            <Tag />
-          </Route>
-          <Route path="*">
-            <NoMatch />
-          </Route>
-        </Switch>
-      </Router>
-    </AppWrapper>
+    <ConfigProvider locale={zhCN}>
+      <AppWrapper>
+        <Router>
+          <Switch>
+            <Route exact path="/tags">
+              <Tags />
+            </Route>
+            <Route exact path="/money">
+              <Money />
+            </Route>
+            <Route exact path="/statistics">
+              <Statistics />
+            </Route>
+            <Redirect exact from="/" to="/money" />
+            <Route exact path="/tags/:id">
+              <Tag />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </Router>
+      </AppWrapper>
+    </ConfigProvider>
   );
 }
 export default App;
