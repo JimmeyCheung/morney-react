@@ -4,6 +4,7 @@ const InputWrapper = styled.div`
   align-items: center;
   padding: 6px 16px;
   border-top: 1px solid var(--border-color);
+  background:#fff;
   & > div {
     width: 50%;
     height: 30px;
@@ -19,7 +20,7 @@ const InputWrapper = styled.div`
     font-size: 30px;
     line-height: 30px;
     text-align: right;
-    overflow: auto;
+    overflow-x: auto;
   }
 `;
 export { InputWrapper };
