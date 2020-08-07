@@ -37,7 +37,7 @@ const IconWrapper = styled.div`
   height: 40px;
   border-radius: 50%;
   &.selected {
-    background: #f60;
+    background: var(--skin-color);
   }
   .icon {
     width: 24px;
