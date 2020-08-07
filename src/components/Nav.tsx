@@ -1,18 +1,16 @@
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import React from 'react';
-import Icon from './Icon';
-
-
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
+import React from "react";
+import Icon from "./Icon";
 const NavWrapper = styled.nav`
   line-height: 24px;
   background: white;
-  box-shadow: 0 0 3px rgba(0,0,0,0.25);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   > ul {
-    display:flex;
-    > li{
+    display: flex;
+    > li {
       width: 33.3333%;
-      text-align:center;
+      text-align: center;
       > a {
         display: flex;
         flex-direction: column;
@@ -20,11 +18,11 @@ const NavWrapper = styled.nav`
         justify-content: center;
         align-items: center;
         .icon {
-          width: 24px;      
-          height: 24px;
+          width: 30px;
+          height: 30px;
         }
-        &.selected{
-          color: red;
+        &.selected {
+          color: var(--skin-color);
         }
       }
     }
@@ -37,21 +35,21 @@ const Nav = () => {
       <ul>
         <li>
           <NavLink to="/tags" activeClassName="selected">
-            <Icon name="label" />
-            标签页
-          </NavLink  >
-        </li>
-        <li>
-          <NavLink to="/money" activeClassName="selected">
-            <Icon name="money" />
-            记账页
-            </NavLink >
+            <Icon name="details" />
+            明细
+          </NavLink>
         </li>
         <li>
           <NavLink to="/statistics" activeClassName="selected">
-            <Icon name="statistic" />
-            统计页
-            </NavLink >
+            <Icon name="addLedger" />
+            记一笔
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/money" activeClassName="selected">
+            <Icon name="report" />
+            报表
+          </NavLink>
         </li>
       </ul>
     </NavWrapper>

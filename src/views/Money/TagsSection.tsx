@@ -1,27 +1,23 @@
 import styled from "styled-components";
 import React from "react";
 import { useTags } from "hooks/useTags";
+import Icon from "components/Icon";
 
 const Wrapper = styled.section`
-  background: #ffffff;
-  padding: 12px 16px;
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
+  overflow: auto;
+  min-height: 130px;
+  background: #fff;
   > ol {
-    margin: 0 -12px;
+    display: flex;
+    flex-wrap: wrap;
     > li {
-      background: #d9d9d9;
-      border-radius: 18px;
-      display: inline-block;
-      padding: 3px 18px;
-      font-size: 14px;
-      margin: 8px 12px;
-      &.selected {
-        background: #f60;
-      }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 25%;
+      padding: 6px 0;
     }
   }
   > button {
@@ -31,6 +27,21 @@ const Wrapper = styled.section`
     border-bottom: 1px solid #333;
     color: #666;
     margin-top: 8px;
+  }
+`;
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  &.selected {
+    background: #f60;
+  }
+  .icon {
+    width: 24px;
+    height: 24px;
   }
 `;
 type Props = {
@@ -60,19 +71,25 @@ const TagsSection: React.FC<Props> = (props) => {
             onClick={() => {
               onToggleTag(tag.id);
             }}
-            className={getClass(tag.id)}
           >
-            {tag.name}
+            <IconWrapper className={getClass(tag.id)}>
+              <Icon className="icon" name="details" />
+            </IconWrapper>
+            <span>{tag.name}</span>
           </li>
         ))}
+
+        <li
+          onClick={() => {
+            addTag();
+          }}
+        >
+          <IconWrapper>
+            <Icon className="icon" name="add" />
+          </IconWrapper>
+          <span>添加类别</span>
+        </li>
       </ol>
-      <button
-        onClick={() => {
-          addTag();
-        }}
-      >
-        新增标签
-      </button>
     </Wrapper>
   );
 };
