@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Wrapper } from "./NumberPadSection/Wrapper";
+import { InputWrapper } from "./NumberPadSection/InputWrapper";
 import { generateOutput } from "./NumberPadSection/generateOutput";
+import { DatePicker } from "antd";
 
 type Props = {
   value: number;
@@ -26,7 +28,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === null) {
       return;
     }
-    if (text === "OK") {
+    if (text === "完成") {
       if (props.onOk) {
         props.onOk();
       }
@@ -38,7 +40,11 @@ const NumberPadSection: React.FC<Props> = (props) => {
   };
   return (
     <Wrapper>
-      <div className="output">{output}</div>
+      <InputWrapper>
+        <DatePicker inputReadOnly bordered={false} onChange={() => {}} />
+        <div className="line"></div>
+        <div className="output">{output}</div>
+      </InputWrapper>
       <div className="pad clearfix" onClick={onClickButtonWrapper}>
         <button>1</button>
         <button>2</button>
@@ -51,7 +57,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
         <button>7</button>
         <button>8</button>
         <button>9</button>
-        <button className="ok">OK</button>
+        <button className="ok">完成</button>
         <button className="zero">0</button>
         <button className="dot">.</button>
       </div>

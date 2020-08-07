@@ -2,23 +2,26 @@ import styled from "styled-components";
 import React, { useState } from "react";
 
 const Wrapper = styled.section`
-  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  background-color: var(--skin-color);
   > ul {
     display: flex;
+    margin: 10px 0;
+    border: 1px solid #000;
+    width: 80%;
+    border-radius: 6px;
+    overflow: hidden;
     > li {
+      padding: 8px 0;
       width: 50%;
+      background: var(--skin-color);
+      color: #000;
       text-align: center;
-      padding: 16px 0;
-      position: relative;
-      &.selected::after {
-        content: "";
-        display: block;
-        height: 3px;
-        background: #333;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        left: 0;
+      &.selected {
+        background: #000;
+        color: var(--skin-color);
       }
     }
   }
