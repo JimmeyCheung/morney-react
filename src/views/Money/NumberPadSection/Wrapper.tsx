@@ -11,6 +11,7 @@ const Wrapper = styled.section`
       height: 64px;
       border: 1px solid var(--border-color);
       background: #fff;
+      
       &:active {
         background: var(--skin-color);
       }
@@ -23,6 +24,14 @@ const Wrapper = styled.section`
         width: 50%;
       }
     }
+    @media screen and (max-height:650px){
+        &>button{
+          height:48px;
+          &.ok {
+          height: 96px;
+          }
+        }
+      }
   }
 `;
 
