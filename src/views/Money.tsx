@@ -6,6 +6,7 @@ import { CategorySection } from "./Money/CategorySection";
 import { NoteSection } from "./Money/NoteSection";
 import { NumberPadSection } from "./Money/NumberPadSection";
 import { useRecords } from "../hooks/useRecords";
+import moment from 'moment';
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
@@ -16,6 +17,7 @@ const defaultFormData = {
   note: "",
   category: "-" as Category,
   amount: 0,
+  createdDate: moment(new Date()).format("YYYY-MM-DD")
 };
 const CategoryWrapper = styled.div`
   background: #c4c4c4;
@@ -26,6 +28,7 @@ const Money = () => {
   const { addRecord } = useRecords();
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({ ...selected, ...obj });
+    console.log({ ...selected, ...obj });
   };
   const submit = () => {
     if (addRecord(selected)) {
@@ -51,8 +54,8 @@ const Money = () => {
           onChange={(note) => onChange({ note })}
         />
         <NumberPadSection
-          value={selected.amount}
-          onChange={(amount) => onChange({ amount })}
+          data={{ amount: selected.amount, createdDate: selected.createdDate }}
+          onChange={(amount, createdDate) => onChange({ amount, createdDate })}
           onOk={() => {
             submit();
           }}

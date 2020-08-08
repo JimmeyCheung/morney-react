@@ -6,7 +6,7 @@ export type RecordItem = {
   note: string;
   category: "+" | "-";
   amount: number;
-  createdAt: string; // ISO 8601
+  createdDate: string; // ISO 8601
 };
 type newRecordItem = Omit<RecordItem, "createdAt">;
 
@@ -28,7 +28,7 @@ export const useRecords = () => {
       alert("请选择标签");
       return false;
     }
-    const record = { ...newRecord, createdAt: new Date().toISOString() };
+    const record = { ...newRecord };
     setRecords([...records, record]);
     return true;
   };

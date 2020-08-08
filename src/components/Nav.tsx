@@ -40,13 +40,13 @@ const Nav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/statistics" activeClassName="selected">
+          <NavLink to="/money" activeClassName="selected">
             <Icon name="addLedger" />
             记一笔
           </NavLink>
         </li>
         <li>
-          <NavLink to="/money" activeClassName="selected">
+          <NavLink to="/statistics" activeClassName="selected">
             <Icon name="report" />
             报表
           </NavLink>

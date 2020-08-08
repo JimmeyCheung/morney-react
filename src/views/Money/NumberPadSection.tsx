@@ -3,25 +3,31 @@ import { Wrapper } from "./NumberPadSection/Wrapper";
 import { InputWrapper } from "./NumberPadSection/InputWrapper";
 import { generateOutput } from "./NumberPadSection/generateOutput";
 import { DatePicker } from "antd";
+import moment from 'moment';
 
 type Props = {
-  value: number;
-  onChange: (value: number) => void;
+  data: {
+    createdDate: string,
+    amount: number
+  };
+  onChange: (amount: number, createdDate: string) => void;
   onOk?: () => void;
 };
 const NumberPadSection: React.FC<Props> = (props) => {
-  const [output, _setOutput] = useState(props.value.toString());
-  const setOutput = (output: string) => {
-    let newOutput: string;
-    if (output.length > 16) {
-      newOutput = output.slice(0, 16);
-    } else if (output.length === 0) {
-      newOutput = "0";
-    } else {
-      newOutput = output;
+  const [output, _setOutput] = useState(props.data.amount.toString());
+  const [createdDate, _setcreatedDate] = useState(props.data.createdDate);
+  const setOutput = (_output: string) => {
+    if (_output.length > 16) {
+      _output = _output.slice(0, 16);
+    } else if (_output.length === 0) {
+      _output = "0";
     }
-    _setOutput(newOutput);
-    props.onChange(parseFloat(newOutput));
+    _setOutput(_output);
+    props.onChange(parseFloat(_output), createdDate);
+  };
+  const setcreatedDate = (createdDate: string) => {
+    _setcreatedDate(createdDate);
+    props.onChange(parseFloat(output), createdDate);
   };
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
@@ -41,7 +47,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <InputWrapper>
-        <DatePicker inputReadOnly bordered={false} onChange={() => {}} />
+        <DatePicker defaultValue={moment(createdDate)} inputReadOnly bordered={false} onChange={(date: any, dateString: string) => { setcreatedDate(dateString) }} />
         <div className="line"></div>
         <div className="output">{output}</div>
       </InputWrapper>

@@ -21,6 +21,7 @@ const InputWrapper = styled.div`
     line-height: 30px;
     text-align: right;
     overflow-x: auto;
+    overflow-y:hidden;
   }
 `;
 export { InputWrapper };
