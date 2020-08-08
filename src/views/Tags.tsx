@@ -9,8 +9,12 @@ import { Center } from "components/Center";
 import { Space } from "../components/Space";
 
 const TagList = styled.ol`
-  font-size: 16px;
-  background: white;
+    height:100%;
+    flex-grow:1;
+    overflow:auto;
+    font-size: 16px;
+    background: white;
+    margin-bottom: 0;
   > li {
     //#e5e5e7
     border-bottom: 1px solid #d5d5d9;
@@ -23,6 +27,13 @@ const TagList = styled.ol`
       align-items: center;
     }
   }
+`;
+const Footer = styled.footer`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-shrink:0;
+    height:60px;
 `;
 const Tags = () => {
     const { tags, addTag } = useTags();
@@ -38,12 +49,9 @@ const Tags = () => {
                     </li>
                 ))}
             </TagList>
-            <Center>
-                <Space />
-                <Space />
-                <Space />
+            <Footer>
                 <Button onClick={addTag}>新增标签</Button>
-            </Center>
+            </Footer>
         </Layout>
     );
 };

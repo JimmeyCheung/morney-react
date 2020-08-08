@@ -8,6 +8,8 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 const Main = styled.div`
+  display:flex;
+  flex-direction:column;
   flex-grow: 1;
   overflow: auto;
 `;
@@ -28,7 +30,7 @@ const Layout: React.FC<Props> = (props) => {
   }, [props.scrollTop]);
   return (
     <Wrapper>
-      <Main ref={mainRef} className={props.className} data-x={"frank"}>
+      <Main ref={mainRef} className={props.className}>
         {props.children}
       </Main>
 
