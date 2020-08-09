@@ -35,8 +35,8 @@ const Nav = () => {
       <ul>
         <li>
           <NavLink to="/tags" activeClassName="selected">
-            <Icon name="details" />
-            明细
+            <Icon name="label" />
+            标签
           </NavLink>
         </li>
         <li>

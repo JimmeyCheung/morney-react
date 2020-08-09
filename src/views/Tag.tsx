@@ -11,7 +11,7 @@ import { Button } from "components/Button";
 import { Label } from 'components/Label';
 
 type Params = {
-  id: string;
+  tag: string;
 };
 const Topbar = styled.header`
   display: flex;
@@ -27,13 +27,13 @@ const InputWrapper = styled.div`
   margin-top: 8px;
 `;
 const Tag: React.FC = () => {
-  const { findTag, updateTag, deleteTag } = useTags();
+  const { updateTag, deleteTag } = useTags();
   const history = useHistory();
   const onClickBack = () => {
     history.goBack();
   };
-  let { id: idString } = useParams<Params>();
-  const tag = findTag(parseInt(idString));
+  let { tag: tagString } = useParams<Params>();
+  const tag = JSON.parse(tagString);
   const tagContent = (tag: { id: number; name: string, category: Category }) => (
     <div>
       <InputWrapper>
@@ -50,9 +50,8 @@ const Tag: React.FC = () => {
       <InputWrapper>
         <Label>
           <span>标签类别</span>
-          <select onChange={(e) => {
-            console.log(e.target.value)
-            let category = tag.category as Category;
+          <select defaultValue={tag.category} onChange={(e) => {
+            let category = e.target.value as Category;
             updateTag({ ...tag, category });
           }}>
             <option value="+">收入</option>

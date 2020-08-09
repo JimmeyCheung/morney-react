@@ -2,12 +2,6 @@ import { useEffect, useState } from "react";
 import { createId } from "lib/createId";
 import { useUpdate } from "./useUpdate";
 import moment from 'moment';
-type Tag = {
-  id: number;
-  name: string;
-  icon: string;
-  category: Category;
-};
 const useTags = () => {
   const [tags, setTags] = useState<{ id: number; name: string, icon: string, category: Category }[]>([]);
   useEffect(() => {
@@ -56,10 +50,10 @@ const useTags = () => {
     setTags(tags.filter((tag) => tag.id !== id));
     return true;
   };
-  const addTag = (data: { tagName: string, category: Category }) => {
-    const { tagName, category } = data;
-    if (tagName !== null && tagName !== "") {
-      setTags([...tags, { id: createId(), name: tagName, icon: "other", category }]);
+  const addTag = (data: { name: string, category: Category }) => {
+    const { name, category } = data;
+    if (name !== null && name !== "") {
+      setTags([...tags, { id: createId(), name, icon: "other", category }]);
     }
   };
   const getName = (id: number) => {
