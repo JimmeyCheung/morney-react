@@ -50,6 +50,7 @@ type Props = {
     category: Category
   };
   onChange: (selected: number[]) => void;
+  showModal: () => void;
 };
 const TagsSection: React.FC<Props> = (props) => {
   const { tags } = useTags();
@@ -83,6 +84,7 @@ const TagsSection: React.FC<Props> = (props) => {
 
         <li
           onClick={() => {
+            props.showModal()
           }}
         >
           <IconWrapper>

@@ -7,6 +7,7 @@ import { NoteSection } from "./Money/NoteSection";
 import { NumberPadSection } from "./Money/NumberPadSection";
 import { useRecords } from "../hooks/useRecords";
 import moment from 'moment';
+import { TagModal } from 'components/TagModal';
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
@@ -25,6 +26,7 @@ const CategoryWrapper = styled.div`
 const Money = () => {
   const [selected, setSelected] = useState(defaultFormData);
   const { addRecord } = useRecords();
+  const [modalState, setModalState] = useState(false);
   const onChange = (obj: Partial<typeof selected>) => {
     // 切换目录，刷新tags列表
     if (obj.hasOwnProperty("category")) {
@@ -50,6 +52,7 @@ const Money = () => {
         <TagsSection
           data={{ tagIds: selected.tagIds, category: selected.category }}
           onChange={(tagIds) => onChange({ tagIds })}
+          showModal={() => { setModalState(true) }}
         />
         <NoteSection
           value={selected.note}
@@ -63,6 +66,7 @@ const Money = () => {
           }}
         />
       </MyLayout>
+      <TagModal visible={modalState} hide={() => { setModalState(false) }} />
     </div>
   );
 };
