@@ -33,7 +33,7 @@ const Tag: React.FC = () => {
   };
   let { id: idString } = useParams<Params>();
   const tag = findTag(parseInt(idString));
-  const tagContent = (tag: { id: number; name: string }) => (
+  const tagContent = (tag: { id: number; name: string, category: Category }) => (
     <div>
       <InputWrapper>
         <Input
@@ -42,7 +42,19 @@ const Tag: React.FC = () => {
           placeholder="标签名"
           value={tag.name}
           onChange={(e) => {
-            updateTag(tag.id, { name: e.target.value });
+            updateTag({ ...tag, name: e.target.value });
+          }}
+        />
+      </InputWrapper>
+      <InputWrapper>
+        <Input
+          label="标签类别"
+          type="text"
+          placeholder="标签类别"
+          value={tag.category}
+          onChange={(e) => {
+            let category = e.target.value as Category;
+            updateTag({ ...tag, category });
           }}
         />
       </InputWrapper>

@@ -8,7 +8,6 @@ export type RecordItem = {
   amount: number;
   createdDate: string; // ISO 8601
 };
-type newRecordItem = Omit<RecordItem, "createdAt">;
 
 export const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
@@ -19,7 +18,7 @@ export const useRecords = () => {
     window.localStorage.setItem("records", JSON.stringify(records));
   }, records);
 
-  const addRecord = (newRecord: newRecordItem) => {
+  const addRecord = (newRecord: RecordItem) => {
     if (newRecord.amount <= 0) {
       alert("请输入金额");
       return false;

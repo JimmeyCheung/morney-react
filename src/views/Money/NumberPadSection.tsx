@@ -15,7 +15,7 @@ type Props = {
 };
 const NumberPadSection: React.FC<Props> = (props) => {
   const [output, _setOutput] = useState(props.data.amount.toString());
-  const [createdDate, _setcreatedDate] = useState(props.data.createdDate);
+  const [createdDate, _setCreatedDate] = useState(props.data.createdDate);
   const setOutput = (_output: string) => {
     if (_output.length > 16) {
       _output = _output.slice(0, 16);
@@ -25,8 +25,8 @@ const NumberPadSection: React.FC<Props> = (props) => {
     _setOutput(_output);
     props.onChange(parseFloat(_output), createdDate);
   };
-  const setcreatedDate = (createdDate: string) => {
-    _setcreatedDate(createdDate);
+  const setCreatedDate = (createdDate: string) => {
+    _setCreatedDate(createdDate);
     props.onChange(parseFloat(output), createdDate);
   };
   const onClickButtonWrapper = (e: React.MouseEvent) => {
@@ -47,7 +47,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <InputWrapper>
-        <DatePicker defaultValue={moment(createdDate)} inputReadOnly bordered={false} onChange={(date: any, dateString: string) => { setcreatedDate(dateString) }} />
+        <DatePicker defaultValue={moment(createdDate)} inputReadOnly bordered={false} onChange={(date: any, dateString: string) => { setCreatedDate(dateString) }} />
         <div className="line"></div>
         <div className="output">{output}</div>
       </InputWrapper>

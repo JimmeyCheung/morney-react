@@ -1601,6 +1601,13 @@
   resolved "https://registry.npm.taobao.org/@testing-library/user-event/download/@testing-library/user-event-7.2.1.tgz#2ad4e844175a3738cb9e7064be5ea070b8863a1c"
   integrity sha1-KtToRBdaNzjLnnBkvl6gcLiGOhw=
 
+"@types/antd@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/@types/antd/download/@types/antd-1.0.0.tgz#f04e2a84efd9ea937366cd3dfbada5d3c949471d"
+  integrity sha1-8E4qhO/Z6pNzZs09+62l08lJRx0=
+  dependencies:
+    antd "*"
+
 "@types/aria-query@^4.2.0":
   version "4.2.0"
   resolved "https://registry.npm.taobao.org/@types/aria-query/download/@types/aria-query-4.2.0.tgz#14264692a9d6e2fa4db3df5e56e94b5e25647ac0"
@@ -2229,7 +2236,7 @@ antd-dayjs-webpack-plugin@^1.0.1:
   resolved "https://registry.npm.taobao.org/antd-dayjs-webpack-plugin/download/antd-dayjs-webpack-plugin-1.0.1.tgz#cc31cc05c9bd69652a4bddab19eb49726bebe0d5"
   integrity sha1-zDHMBcm9aWUqS92rGetJcmvr4NU=
 
-antd@^4.5.2:
+antd@*, antd@^4.5.2:
   version "4.5.2"
   resolved "https://registry.npm.taobao.org/antd/download/antd-4.5.2.tgz?cache=0&sync_timestamp=1596383981040&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fantd%2Fdownload%2Fantd-4.5.2.tgz#0551b2999d5c9827d996b860e827974d50d87ed9"
   integrity sha1-BVGymZ1cmCfZlrhg6CeXTVDYftk=

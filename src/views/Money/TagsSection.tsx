@@ -45,12 +45,15 @@ const IconWrapper = styled.div`
   }
 `;
 type Props = {
-  value: number[];
+  data: {
+    tagIds: number[],
+    category: Category
+  };
   onChange: (selected: number[]) => void;
 };
 const TagsSection: React.FC<Props> = (props) => {
-  const { tags, addTag } = useTags();
-  const selectedTagIds = props.value;
+  const { tags } = useTags();
+  const selectedTagIds = props.data.tagIds;
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
     if (index >= 0) {
@@ -64,7 +67,7 @@ const TagsSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <ol>
-        {tags.map((tag) => (
+        {tags.filter(tag => { return tag.category === props.data.category }).map((tag) => (
           <li
             key={tag.id}
             onClick={() => {
@@ -80,7 +83,6 @@ const TagsSection: React.FC<Props> = (props) => {
 
         <li
           onClick={() => {
-            addTag();
           }}
         >
           <IconWrapper>

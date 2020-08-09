@@ -5,9 +5,6 @@ import styled from "styled-components";
 import Icon from "components/Icon";
 import { Link } from "react-router-dom";
 import { Button } from "components/Button";
-import { Center } from "components/Center";
-import { Space } from "../components/Space";
-
 const TagList = styled.ol`
     height:100%;
     flex-grow:1;
@@ -36,7 +33,7 @@ const Footer = styled.footer`
     height:60px;
 `;
 const Tags = () => {
-    const { tags, addTag } = useTags();
+    const { tags } = useTags();
     return (
         <Layout>
             <TagList>
@@ -50,7 +47,7 @@ const Tags = () => {
                 ))}
             </TagList>
             <Footer>
-                <Button onClick={addTag}>新增标签</Button>
+                <Button onClick={() => { }}>新增标签</Button>
             </Footer>
         </Layout>
     );

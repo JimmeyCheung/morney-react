@@ -11,7 +11,6 @@ const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
-type Category = "-" | "+";
 const defaultFormData = {
   tagIds: [] as number[],
   note: "",
@@ -27,8 +26,11 @@ const Money = () => {
   const [selected, setSelected] = useState(defaultFormData);
   const { addRecord } = useRecords();
   const onChange = (obj: Partial<typeof selected>) => {
+    // 切换目录，刷新tags列表
+    if (obj.hasOwnProperty("category")) {
+
+    }
     setSelected({ ...selected, ...obj });
-    console.log({ ...selected, ...obj });
   };
   const submit = () => {
     if (addRecord(selected)) {
@@ -46,7 +48,7 @@ const Money = () => {
           />
         </CategoryWrapper>
         <TagsSection
-          value={selected.tagIds}
+          data={{ tagIds: selected.tagIds, category: selected.category }}
           onChange={(tagIds) => onChange({ tagIds })}
         />
         <NoteSection
