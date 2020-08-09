@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useUpdate } from "./useUpdate";
+import { message } from 'antd';
 
 export type RecordItem = {
   tagIds: number[];
@@ -20,11 +21,11 @@ export const useRecords = () => {
 
   const addRecord = (newRecord: RecordItem) => {
     if (newRecord.amount <= 0) {
-      alert("请输入金额");
+      message.warning('请输入金额');
       return false;
     }
     if (newRecord.tagIds.length === 0) {
-      alert("请选择标签");
+      message.warning('请选择标签');
       return false;
     }
     const record = { ...newRecord };

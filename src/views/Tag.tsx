@@ -9,6 +9,7 @@ import { Center } from "../components/Center";
 import { Space } from "../components/Space";
 import { Button } from "components/Button";
 import { Label } from 'components/Label';
+import { message } from 'antd';
 
 type Params = {
   tag: string;
@@ -66,7 +67,7 @@ const Tag: React.FC = () => {
         <Button
           onClick={() => {
             if (deleteTag(tag.id)) {
-              alert("删除成功");
+              message.success('删除成功');
               history.goBack();
             }
           }}

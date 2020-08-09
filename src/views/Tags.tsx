@@ -35,6 +35,7 @@ const Footer = styled.footer`
 `;
 
 const Tags = () => {
+    console.log(1)
     const { tags } = useTags();
     const [modalState, setModalState] = useState(false);
     return (

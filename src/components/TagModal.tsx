@@ -4,11 +4,8 @@ import { useTags } from 'hooks/useTags';
 import React from 'react';
 import { Input } from './Input';
 import { Label } from './Label';
+import { message } from 'antd';
 
-type NewTag = {
-    name: string,
-    category: Category
-};
 type Props = {
     visible: boolean,
     hide: () => void
@@ -24,7 +21,7 @@ const TagModal = (props: Props) => {
     const [newTag, setNewTag] = useState(getNewTag());
     const saveTag = () => {
         if (!newTag.name.trim()) {
-            return alert("标签名不能为空");
+            return message.warning('标签名不能为空');
         }
         addTag(newTag);
         props.hide();
@@ -54,7 +51,6 @@ const TagModal = (props: Props) => {
                     <select defaultValue={newTag.category}
                         onChange={
                             (e) => {
-                                console.log(e.target.value)
                                 setNewTag(
                                     {
                                         ...newTag,

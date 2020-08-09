@@ -8,6 +8,7 @@ import { NumberPadSection } from "./Money/NumberPadSection";
 import { useRecords } from "../hooks/useRecords";
 import moment from 'moment';
 import { TagModal } from 'components/TagModal';
+import { message } from 'antd';
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
@@ -36,7 +37,7 @@ const Money = () => {
   };
   const submit = () => {
     if (addRecord(selected)) {
-      alert("保存成功");
+      message.success('保存成功');
       setSelected(defaultFormData);
     }
   };
