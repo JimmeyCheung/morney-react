@@ -8,6 +8,7 @@ import { Input } from "../components/Input";
 import { Center } from "../components/Center";
 import { Space } from "../components/Space";
 import { Button } from "components/Button";
+import { Label } from 'components/Label';
 
 type Params = {
   id: string;
@@ -47,16 +48,17 @@ const Tag: React.FC = () => {
         />
       </InputWrapper>
       <InputWrapper>
-        <Input
-          label="标签类别"
-          type="text"
-          placeholder="标签类别"
-          value={tag.category}
-          onChange={(e) => {
-            let category = e.target.value as Category;
+        <Label>
+          <span>标签类别</span>
+          <select onChange={(e) => {
+            console.log(e.target.value)
+            let category = tag.category as Category;
             updateTag({ ...tag, category });
-          }}
-        />
+          }}>
+            <option value="+">收入</option>
+            <option value="-">支出</option>
+          </select>
+        </Label>
       </InputWrapper>
       <Center>
         <Space />
