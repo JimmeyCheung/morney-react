@@ -1,10 +1,13 @@
 import Layout from "../components/Layout";
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useState, useRef } from "react";
 import { CategorySection } from "./Money/CategorySection";
 import styled from "styled-components";
 import { RecordItem, useRecords } from "../hooks/useRecords";
 import { useTags } from "../hooks/useTags";
 import day from "dayjs";
+import { useEffect } from "react";
+
+const echarts = require("echarts");
 
 const CategoryWrapper = styled.div`
   background: white;
@@ -28,6 +31,11 @@ const Item = styled.div`
     color: #999;
   }
 `;
+
+const Chart = styled.div`
+  width: 100%;
+  height: 300px;
+`;
 const Statistics = () => {
   const [category, setCategory] = useState<"-" | "+">("-");
   const { records } = useRecords();
@@ -49,6 +57,32 @@ const Statistics = () => {
     if (a[0] < b[0]) return 1;
     return 0;
   });
+  const refChart = useRef(null);
+  useEffect(() => {
+    // 基于准备好的dom，初始化echarts实例
+    const myChart = echarts.init(refChart.current);
+    myChart.setOption({
+      title: {
+        text: "总支出3999元",
+        subtext: "其中每天平均消费xxx元",
+        textStyle: { fontWeight: "normal" },
+      },
+      xAxis: {
+        type: "category",
+        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      },
+      yAxis: {
+        type: "value",
+      },
+      series: [
+        {
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: "line",
+        },
+      ],
+    });
+  });
+
   return (
     <Layout>
       <CategoryWrapper>
@@ -57,6 +91,7 @@ const Statistics = () => {
           onChange={(value) => setCategory(value)}
         />
       </CategoryWrapper>
+      <Chart ref={refChart}></Chart>
 
       {array.map(([date, records], i) => (
         <div key={i}>

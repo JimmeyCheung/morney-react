@@ -33,6 +33,7 @@
     "dayjs": "^1.8.31",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
+    "echarts": "^4.8.0",
     "eslint": "^6.6.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-loader": "3.0.3",
