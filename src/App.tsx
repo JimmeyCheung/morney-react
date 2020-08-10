@@ -12,10 +12,10 @@ import NoMatch from "components/NoMatch";
 import Money from "views/Money";
 import { Tag } from "./views/Tag";
 import { ConfigProvider } from "antd";
-import zhCN from 'antd/es/locale/zh_CN'; // 引入语言包
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-moment.locale('zh-cn');
+import zhCN from "antd/es/locale/zh_CN"; // 引入语言包
+import moment from "moment";
+import "moment/locale/zh-cn";
+moment.locale("zh-cn");
 
 const AppWrapper = styled.div`
   color: #333;
@@ -37,7 +37,7 @@ function App() {
               <Statistics />
             </Route>
             <Redirect exact from="/" to="/money" />
-            <Route exact path="/tags/:tag">
+            <Route exact path="/tags/:id">
               <Tag />
             </Route>
             <Route path="*">

@@ -8,11 +8,11 @@ import { Input } from "../components/Input";
 import { Center } from "../components/Center";
 import { Space } from "../components/Space";
 import { Button } from "components/Button";
-import { Label } from 'components/Label';
-import { message } from 'antd';
+import { Label } from "components/Label";
+import { message } from "antd";
 
 type Params = {
-  tag: string;
+  id: string;
 };
 const Topbar = styled.header`
   display: flex;
@@ -28,14 +28,18 @@ const InputWrapper = styled.div`
   margin-top: 8px;
 `;
 const Tag: React.FC = () => {
-  const { updateTag, deleteTag } = useTags();
+  const { updateTag, deleteTag, findTag } = useTags();
   const history = useHistory();
   const onClickBack = () => {
     history.goBack();
   };
-  let { tag: tagString } = useParams<Params>();
-  const tag = JSON.parse(tagString);
-  const tagContent = (tag: { id: number; name: string, category: Category }) => (
+  let { id: idString } = useParams<Params>();
+  const tag = findTag(parseInt(idString));
+  const tagContent = (tag: {
+    id: number;
+    name: string;
+    category: Category;
+  }) => (
     <div>
       <InputWrapper>
         <Input
@@ -51,10 +55,13 @@ const Tag: React.FC = () => {
       <InputWrapper>
         <Label>
           <span>标签类别</span>
-          <select defaultValue={tag.category} onChange={(e) => {
-            let category = e.target.value as Category;
-            updateTag({ ...tag, category });
-          }}>
+          <select
+            defaultValue={tag.category}
+            onChange={(e) => {
+              let category = e.target.value as Category;
+              updateTag({ ...tag, category });
+            }}
+          >
             <option value="+">收入</option>
             <option value="-">支出</option>
           </select>
@@ -67,7 +74,7 @@ const Tag: React.FC = () => {
         <Button
           onClick={() => {
             if (deleteTag(tag.id)) {
-              message.success('删除成功');
+              message.success("删除成功");
               history.goBack();
             }
           }}
