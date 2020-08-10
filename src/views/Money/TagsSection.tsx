@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React from "react";
-import { useTags } from "hooks/useTags";
 import Icon from "components/Icon";
 
 const Wrapper = styled.section`
@@ -46,14 +45,15 @@ const IconWrapper = styled.div`
 `;
 type Props = {
   data: {
-    tagIds: number[],
-    category: Category
+    tagIds: number[];
+    category: Category;
   };
+  tags: Tag[];
   onChange: (selected: number[]) => void;
   showModal: () => void;
 };
 const TagsSection: React.FC<Props> = (props) => {
-  const { tags } = useTags();
+  const { tags } = props;
   const selectedTagIds = props.data.tagIds;
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
@@ -68,23 +68,27 @@ const TagsSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <ol>
-        {tags.filter(tag => { return tag.category === props.data.category }).map((tag) => (
-          <li
-            key={tag.id}
-            onClick={() => {
-              onToggleTag(tag.id);
-            }}
-          >
-            <IconWrapper className={getClass(tag.id)}>
-              <Icon className="icon" name={tag.icon} />
-            </IconWrapper>
-            <span>{tag.name}</span>
-          </li>
-        ))}
+        {tags
+          .filter((tag) => {
+            return tag.category === props.data.category;
+          })
+          .map((tag) => (
+            <li
+              key={tag.id}
+              onClick={() => {
+                onToggleTag(tag.id);
+              }}
+            >
+              <IconWrapper className={getClass(tag.id)}>
+                <Icon className="icon" name={tag.icon} />
+              </IconWrapper>
+              <span>{tag.name}</span>
+            </li>
+          ))}
 
         <li
           onClick={() => {
-            props.showModal()
+            props.showModal();
           }}
         >
           <IconWrapper>

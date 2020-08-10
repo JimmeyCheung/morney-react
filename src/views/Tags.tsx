@@ -1,5 +1,5 @@
 import Layout from "../components/Layout";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTags } from "hooks/useTags";
 import styled from "styled-components";
 import Icon from "components/Icon";
@@ -35,12 +35,12 @@ const Footer = styled.footer`
 `;
 
 const Tags = () => {
-  console.log(1);
-  const { tags } = useTags();
+  const { tags, addTag } = useTags();
   const [modalState, setModalState] = useState(false);
+  const refTagList = useRef<HTMLOListElement>(null);
   return (
     <Layout>
-      <TagList>
+      <TagList ref={refTagList}>
         {tags.map((tag) => (
           <li key={tag.id}>
             <Link to={"/tags/" + tag.id}>
@@ -61,6 +61,7 @@ const Tags = () => {
       </Footer>
       <TagModal
         visible={modalState}
+        addTag={addTag}
         hide={() => {
           setModalState(false);
         }}

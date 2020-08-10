@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { createId } from "lib/createId";
 import { useUpdate } from "./useUpdate";
 const useTags = () => {
-  const [tags, setTags] = useState<{ id: number; name: string, icon: string, category: Category }[]>([]);
+  const [tags, setTags] = useState<
+    { id: number; name: string; icon: string; category: Category }[]
+  >([]);
   useEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem("tags") || "[]");
+
     if (localTags.length === 0) {
       localTags = [
         { id: createId(), name: "服饰", category: "-", icon: "dress" },
@@ -25,7 +28,6 @@ const useTags = () => {
     setTags(localTags);
   }, []); // 组件挂载时执行
   useUpdate(() => {
-    console.log(tags);
     window.localStorage.setItem("tags", JSON.stringify(tags));
   }, tags);
   const findTag = (id: number) => tags.filter((tag) => tag.id === id)[0];
@@ -40,17 +42,27 @@ const useTags = () => {
     return result;
   };
   const getTags = (category: Category) => {
-    tags.filter(tag => tag.category === category);
+    tags.filter((tag) => tag.category === category);
   };
-  const updateTag = ({ id, name, category }: { id: number, name: string, category: Category }) => {
-    setTags(tags.map((tag) => (tag.id === id ? { ...tag, name, category } : tag)));
+  const updateTag = ({
+    id,
+    name,
+    category,
+  }: {
+    id: number;
+    name: string;
+    category: Category;
+  }) => {
+    setTags(
+      tags.map((tag) => (tag.id === id ? { ...tag, name, category } : tag))
+    );
   };
   const deleteTag = (id: number): boolean => {
     setTags(tags.filter((tag) => tag.id !== id));
     return true;
   };
-  const addTag = (data: { name: string, category: Category }) => {
-    console.log(2)
+  const addTag = (data: { name: string; category: Category }) => {
+    console.log("开始添加");
     setTags([...tags, { id: createId(), icon: "other", ...data }]);
   };
   const getName = (id: number) => {

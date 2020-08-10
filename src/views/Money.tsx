@@ -6,9 +6,10 @@ import { CategorySection } from "./Money/CategorySection";
 import { NoteSection } from "./Money/NoteSection";
 import { NumberPadSection } from "./Money/NumberPadSection";
 import { useRecords } from "../hooks/useRecords";
-import moment from 'moment';
-import { TagModal } from 'components/TagModal';
-import { message } from 'antd';
+import moment from "moment";
+import { TagModal } from "components/TagModal";
+import { message } from "antd";
+import { useTags } from "hooks/useTags";
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
@@ -18,7 +19,7 @@ const defaultFormData = {
   note: "",
   category: "-" as Category,
   amount: 0,
-  createdDate: moment(new Date()).format("YYYY-MM-DD")
+  createdDate: moment(new Date()).format("YYYY-MM-DD"),
 };
 const CategoryWrapper = styled.div`
   background: #c4c4c4;
@@ -26,18 +27,18 @@ const CategoryWrapper = styled.div`
 
 const Money = () => {
   const [selected, setSelected] = useState(defaultFormData);
+  const { tags, addTag } = useTags();
   const { addRecord } = useRecords();
   const [modalState, setModalState] = useState(false);
   const onChange = (obj: Partial<typeof selected>) => {
     // 切换目录，刷新tags列表
     if (obj.hasOwnProperty("category")) {
-
     }
     setSelected({ ...selected, ...obj });
   };
   const submit = () => {
     if (addRecord(selected)) {
-      message.success('保存成功');
+      message.success("保存成功");
       setSelected(defaultFormData);
     }
   };
@@ -52,8 +53,11 @@ const Money = () => {
         </CategoryWrapper>
         <TagsSection
           data={{ tagIds: selected.tagIds, category: selected.category }}
+          tags={tags}
           onChange={(tagIds) => onChange({ tagIds })}
-          showModal={() => { setModalState(true) }}
+          showModal={() => {
+            setModalState(true);
+          }}
         />
         <NoteSection
           value={selected.note}
@@ -67,7 +71,13 @@ const Money = () => {
           }}
         />
       </MyLayout>
-      <TagModal visible={modalState} hide={() => { setModalState(false) }} />
+      <TagModal
+        visible={modalState}
+        addTag={addTag}
+        hide={() => {
+          setModalState(false);
+        }}
+      />
     </div>
   );
 };
