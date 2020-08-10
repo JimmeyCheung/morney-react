@@ -6,7 +6,7 @@ const Wrapper = styled.section`
   flex-grow: 1;
   overflow: auto;
   min-height: 130px;
-  background: rgb(245, 245, 245);
+  background: var(--bg-color);
   > ol {
     display: flex;
     flex-wrap: wrap;

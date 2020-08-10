@@ -2,14 +2,6 @@ import { useEffect, useState } from "react";
 import { useUpdate } from "./useUpdate";
 import { message } from 'antd';
 
-export type RecordItem = {
-  tagIds: number[];
-  note: string;
-  category: "+" | "-";
-  amount: number;
-  createdDate: string; // ISO 8601
-};
-
 export const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
   useEffect(() => {
