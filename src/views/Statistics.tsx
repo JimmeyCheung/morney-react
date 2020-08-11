@@ -4,12 +4,12 @@ import { CategorySection } from "./Money/CategorySection";
 import styled from "styled-components";
 import { useRecords } from "../hooks/useRecords";
 import day from "dayjs";
-import { ChartsSection } from './Statistics/ChartsSection';
-import { TabsSection } from './Statistics/TabsSection';
-import { BillSection } from './Statistics/BillSection';
+import { ChartsSection } from "./Statistics/ChartsSection";
+import { TabsSection } from "./Statistics/TabsSection";
+import { BillSection } from "./Statistics/BillSection";
 
 const MyLayout = styled(Layout)`
-  background:#fff;
+  background: #fff;
 `;
 const CategoryWrapper = styled.div`
   background: white;
@@ -28,7 +28,6 @@ const Statistics = () => {
     hash[key].push(r);
   });
 
-
   return (
     <MyLayout>
       <CategoryWrapper>
@@ -39,7 +38,7 @@ const Statistics = () => {
       </CategoryWrapper>
       <TabsSection />
       <ChartsSection records={records} />
-      <BillSection />
+      <BillSection records={records} />
     </MyLayout>
   );
 };

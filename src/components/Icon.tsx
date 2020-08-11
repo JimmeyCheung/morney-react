@@ -6,6 +6,8 @@ type Props = {
   name?: string;
 } & React.SVGAttributes<SVGElement>;
 const SvgWrapper = styled.div`
+  display: flex;
+  align-items: center;
   .icon {
     width: 1em;
     height: 1em;
