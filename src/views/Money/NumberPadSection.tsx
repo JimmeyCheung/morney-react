@@ -47,8 +47,8 @@ const NumberPadSection: React.FC<Props> = (props) => {
     }
   };
   useEffect(() => {
-    console.log("output changed");
-  }, [output]);
+    _setOutput(props.data.amount.toString());
+  }, [props]);
   return (
     <Wrapper>
       <InputWrapper>
