@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 const Wrapper = styled.section`
     &>.tabs{
@@ -27,21 +27,22 @@ const Wrapper = styled.section`
         }
     }
 `;
-const tabs = [
-    { text: "周", value: 1, selected: true },
-    { text: "月", value: 2 },
-    { text: "年", value: 3 }
-];
-const TabsSection: React.FC = () => {
-    const [selectedIndex, setSelectedIndex] = useState(0);
+
+type Props = {
+    tabs: { text: string; value: string; }[],
+    tabIndex: number,
+    setTabIndex: React.Dispatch<React.SetStateAction<number>>
+};
+const TabsSection = (props: Props) => {
+    const { tabIndex, setTabIndex, tabs } = props;
     const getClass = (index: number) => {
-        return `tab ${index === selectedIndex ? "selected" : ""}`
+        return `tab ${index === tabIndex ? "selected" : ""}`
     }
     return (
         <Wrapper>
             <div className="tabs">
                 {tabs.map((tab, index) => {
-                    return <div className={getClass(index)} onClick={() => { setSelectedIndex(index) }} key={index}>{tab.text}</div>
+                    return <div className={getClass(index)} onClick={() => { setTabIndex(index) }} key={index}>{tab.text}</div>
                 })}
             </div>
         </Wrapper>

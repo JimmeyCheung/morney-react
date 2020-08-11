@@ -18,6 +18,7 @@ const Wrapper = styled.section`
     margin: 10px;
     border-top: 1px solid var(--border-color);
     overflow: auto;
+    font-size:14px;
   }
 `;
 const BillWrapper = styled.li`
@@ -48,7 +49,7 @@ const BillSection = (props: Props) => {
   const { records } = props;
   const getBillList = () => {
     let billList: any[] = [];
-    records.forEach((record, index) => {
+    records.forEach((record) => {
       const {
         amount,
         tagIds: [tagId],

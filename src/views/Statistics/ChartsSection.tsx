@@ -4,7 +4,7 @@ import React from 'react';
 
 const echarts = require("echarts");
 type Props = {
-    records: RecordItem[]
+    chartData: { xAxis: string[], series: number[] }
 }
 
 const Wrapper = styled.section`
@@ -15,8 +15,9 @@ const Wrapper = styled.section`
         height:100%;
     }
 `;
-const ChartsSection: React.FC<Props> = (props) => {
+const ChartsSection = (props: Props) => {
     const refChart = useRef(null);
+    const { xAxis, series } = props.chartData;
     useEffect(() => {
         // 基于准备好的dom，初始化echarts实例
         const myChart = echarts.init(refChart.current);
@@ -28,14 +29,14 @@ const ChartsSection: React.FC<Props> = (props) => {
             },
             xAxis: {
                 type: "category",
-                data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                data: xAxis,
             },
             yAxis: {
                 type: "value",
             },
             series: [
                 {
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: series,
                     type: "line",
                 },
             ],

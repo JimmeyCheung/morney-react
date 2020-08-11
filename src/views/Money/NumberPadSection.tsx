@@ -38,7 +38,6 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === "完成") {
       if (props.onOk) {
         props.onOk();
-        console.log("保存成功");
       }
       return;
     }
