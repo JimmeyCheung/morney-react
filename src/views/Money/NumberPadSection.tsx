@@ -3,12 +3,13 @@ import { Wrapper } from "./NumberPadSection/Wrapper";
 import { InputWrapper } from "./NumberPadSection/InputWrapper";
 import { generateOutput } from "./NumberPadSection/generateOutput";
 import { DatePicker } from "antd";
-import moment from 'moment';
+import moment from "moment";
+import { useEffect } from "react";
 
 type Props = {
   data: {
-    createdDate: string,
-    amount: number
+    createdDate: string;
+    amount: number;
   };
   onChange: (amount: number, createdDate: string) => void;
   onOk?: () => void;
@@ -37,6 +38,7 @@ const NumberPadSection: React.FC<Props> = (props) => {
     if (text === "完成") {
       if (props.onOk) {
         props.onOk();
+        console.log("保存成功");
       }
       return;
     }
@@ -44,10 +46,20 @@ const NumberPadSection: React.FC<Props> = (props) => {
       setOutput(generateOutput(text, output));
     }
   };
+  useEffect(() => {
+    console.log("output changed");
+  }, [output]);
   return (
     <Wrapper>
       <InputWrapper>
-        <DatePicker defaultValue={moment(createdDate)} inputReadOnly bordered={false} onChange={(date: any, dateString: string) => { setCreatedDate(dateString) }} />
+        <DatePicker
+          defaultValue={moment(createdDate)}
+          inputReadOnly
+          bordered={false}
+          onChange={(date: any, dateString: string) => {
+            setCreatedDate(dateString);
+          }}
+        />
         <div className="line"></div>
         <div className="output">{output}</div>
       </InputWrapper>

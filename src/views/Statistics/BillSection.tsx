@@ -48,7 +48,7 @@ const BillSection = (props: Props) => {
   const { records } = props;
   const getBillList = () => {
     let billList: any[] = [];
-    records.map((record, index) => {
+    records.forEach((record, index) => {
       const {
         amount,
         tagIds: [tagId],
