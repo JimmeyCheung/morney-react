@@ -1,52 +1,59 @@
-import styled from 'styled-components';
-import { useRef, useEffect } from 'react';
-import React from 'react';
+import styled from "styled-components";
+import { useRef } from "react";
+import React from "react";
+import { useUpdate } from "../../hooks/useUpdate";
 
 const echarts = require("echarts");
 type Props = {
-    chartData: { xAxis: string[], series: number[] }
-}
+  chartData: ChartData;
+};
 
 const Wrapper = styled.section`
-    width: 100%;
-    height: 250px;
-    padding:10px;
-    &>.chart{
-        height:100%;
-    }
+  width: 100%;
+  height: 250px;
+  padding: 10px;
+  & > .chart {
+    height: 100%;
+  }
 `;
 const ChartsSection = (props: Props) => {
-    const refChart = useRef(null);
-    const { xAxis, series } = props.chartData;
-    useEffect(() => {
-        // 基于准备好的dom，初始化echarts实例
-        const myChart = echarts.init(refChart.current);
-        myChart.setOption({
-            title: {
-                text: "总支出3999元",
-                subtext: "其中每天平均消费xxx元",
-                textStyle: { fontWeight: "normal" },
-            },
-            xAxis: {
-                type: "category",
-                data: xAxis,
-            },
-            yAxis: {
-                type: "value",
-            },
-            series: [
-                {
-                    data: series,
-                    type: "line",
-                },
-            ],
-        });
+  const refChart = useRef(null);
+  const { xAxis, series, totalAmount, averageAmount } = props.chartData;
+  let myChart: any = undefined;
+  useUpdate(() => {
+    myChart = echarts.init(refChart.current);
+    myChart.setOption({
+      title: {
+        text: `总支出${totalAmount}元`,
+        subtext: `其中每天平均消费${averageAmount}元`,
+        textStyle: { fontWeight: "normal" },
+      },
+      grid: {
+        left: "5px", // 与容器左侧的距离
+        right: "5px", // 与容器右侧的距离
+        bottom: 0,
+        containLabel: true,
+      },
+      xAxis: {
+        type: "category",
+        data: xAxis,
+      },
+      yAxis: {
+        type: "value",
+      },
+      series: [
+        {
+          data: series,
+          type: "line",
+        },
+      ],
     });
-    return (
-        <Wrapper>
-            <div className="chart" ref={refChart}></div>
-        </Wrapper>
-    );
-}
+  }, [props]);
+  return (
+    <Wrapper>
+      <div className="chart" ref={refChart}></div>
+    </Wrapper>
+  );
+};
 
 export { ChartsSection };

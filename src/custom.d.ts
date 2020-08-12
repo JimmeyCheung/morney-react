@@ -7,7 +7,6 @@ type Tag = {
     icon: string;
     category: Category;
 };
-
 type RecordItem = {
     tagIds: number[];
     note: string;
@@ -15,3 +14,9 @@ type RecordItem = {
     amount: number;
     createdDate: string; // ISO 8601
 };
+type ChartData = {
+    xAxis: string[];
+    series: number[];
+    totalAmount: number;
+    averageAmount: number;
+}
