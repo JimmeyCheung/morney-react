@@ -33,7 +33,15 @@ const Footer = styled.footer`
   flex-shrink: 0;
   height: 60px;
 `;
-
+const IconWrap = styled.div`
+  display:flex;
+  .icon{
+    width:20px;
+    height:20px;
+    margin-right:5px;
+    color:var(--skin-color);
+  }
+`;
 const Tags = () => {
   const { tags, addTag } = useTags();
   const [modalState, setModalState] = useState(false);
@@ -44,7 +52,10 @@ const Tags = () => {
         {tags.map((tag) => (
           <li key={tag.id}>
             <Link to={"/tags/" + tag.id}>
-              <span className="oneLine">{tag.name}</span>
+              <IconWrap>
+                <Icon className="icon" name={tag.icon} />
+                <span className="oneLine">{tag.name}</span>
+              </IconWrap>
               <Icon name="right" />
             </Link>
           </li>

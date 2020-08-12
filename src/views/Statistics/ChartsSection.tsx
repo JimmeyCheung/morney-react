@@ -26,7 +26,8 @@ const ChartsSection = (props: Props) => {
       title: {
         text: `总支出${totalAmount}元`,
         subtext: `其中每天平均消费${averageAmount}元`,
-        textStyle: { fontWeight: "normal" },
+        textStyle: { fontWeight: "normal", fontSize: 14, color: "#a8a3a3" },
+        subtextStyle: { color: "#a8a3a3" },
       },
       grid: {
         left: "5px", // 与容器左侧的距离
@@ -48,6 +49,13 @@ const ChartsSection = (props: Props) => {
         },
       ],
     });
+    const listener = () => {
+      myChart.resize();
+    };
+    window.addEventListener("resize", listener);
+    return () => {
+      window.removeEventListener("resize", listener);
+    };
   }, [props]);
   return (
     <Wrapper>

@@ -7,7 +7,8 @@ export const useUpdate = (fn: () => void, dependency: any) => {
   });
   useEffect(() => {
     if (count.current > 1) {
-      fn();
+      let x = fn();
+      return x;
     }
   }, [fn, dependency]); // 不可变数据
 };

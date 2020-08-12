@@ -28,6 +28,7 @@ const BillWrapper = styled.li`
   .icon {
     width: 20px;
     height: 20px;
+    color:var(--skin-color);
   }
   & > .info {
     display: flex;
