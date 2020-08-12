@@ -12,7 +12,6 @@ const useTags = () => {
       localTags = [
         { id: createId(), name: "服饰", category: "-", icon: "dress" },
         { id: createId(), name: "餐饮", category: "-", icon: "food" },
-        { id: createId(), name: "居家", category: "-", icon: "hotel" },
         { id: createId(), name: "交通", category: "-", icon: "traffic" },
         { id: createId(), name: "旅游", category: "-", icon: "travel" },
         { id: createId(), name: "红包", category: "+", icon: "cash" },

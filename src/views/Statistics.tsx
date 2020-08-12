@@ -46,7 +46,7 @@ const Statistics = () => {
         />
       </CategoryWrapper>
       <TabsSection tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
-      <ChartsSection chartData={chartData} />
+      <ChartsSection chartData={chartData} category={category} />
       <BillSection records={getRecordsByCategory(records, category)} />
     </MyLayout>
   );

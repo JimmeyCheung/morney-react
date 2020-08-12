@@ -94,7 +94,7 @@ const TagsSection: React.FC<Props> = (props) => {
           <IconWrapper>
             <Icon className="icon" name="add" />
           </IconWrapper>
-          <span>添加类别</span>
+          <span>添加</span>
         </li>
       </ol>
     </Wrapper>

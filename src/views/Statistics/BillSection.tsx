@@ -32,12 +32,25 @@ const BillWrapper = styled.li`
   }
   & > .info {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100%;
     margin-left: 10px;
     border-bottom: 1px solid var(--border-color);
+
+    >span{
+      flex-shrink:0;
+    }
+    .remark{
+      margin-left:10px;
+      font-size:14px;
+      color:#a8a3a3;
+    }
+    .record-amount{
+      flex-shrink:1;
+      width:100%;
+      text-align:right;
+    }
   }
   & > .amount {
   }
@@ -73,7 +86,8 @@ const BillSection = (props: Props) => {
               <Icon className="icon" name={record.icon} />
               <div className="info">
                 <span>{record.name}</span>
-                <span>{record.amount}</span>
+                <span className="remark">{record.note}</span>
+                <span className="record-amount">{record.amount}</span>
               </div>
             </BillWrapper>
           );

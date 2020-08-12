@@ -6,6 +6,7 @@ import { useUpdate } from "../../hooks/useUpdate";
 const echarts = require("echarts");
 type Props = {
   chartData: ChartData;
+  category: string
 };
 
 const Wrapper = styled.section`
@@ -20,12 +21,14 @@ const ChartsSection = (props: Props) => {
   const refChart = useRef(null);
   const { xAxis, series, totalAmount, averageAmount } = props.chartData;
   let myChart: any = undefined;
+  const categoryName = props.category === '-' ? '支出' : '收入';
   useUpdate(() => {
     myChart = echarts.init(refChart.current);
     myChart.setOption({
       title: {
-        text: `总支出${totalAmount}元`,
-        subtext: `其中每天平均消费${averageAmount}元`,
+        text: `总${categoryName + totalAmount}元`,
+        subtext: `其中每天平均${categoryName + averageAmount
+          }元`,
         textStyle: { fontWeight: "normal", fontSize: 14, color: "#a8a3a3" },
         subtextStyle: { color: "#a8a3a3" },
       },
@@ -35,12 +38,22 @@ const ChartsSection = (props: Props) => {
         bottom: 0,
         containLabel: true,
       },
+      tooltip: {
+        trigger: 'axis',
+        formatter: '{c}元'
+      },
       xAxis: {
         type: "category",
         data: xAxis,
+        axisLabel: {
+          formatter: '{value}'
+        },
       },
       yAxis: {
         type: "value",
+        axisLabel: {
+          formatter: '{value}元'
+        },
       },
       series: [
         {
@@ -52,7 +65,7 @@ const ChartsSection = (props: Props) => {
     const listener = () => {
       myChart.resize();
     };
-    window.addEventListener("resize", listener);
+    window.addEventListener("resize", listener);//window resize时图标宽度自适应
     return () => {
       window.removeEventListener("resize", listener);
     };
