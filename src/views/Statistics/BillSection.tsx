@@ -27,6 +27,9 @@ const BillWrapper = styled.li`
   flex-direction: column;
   align-items: center;
   cursor:pointer;
+  &.selected{
+    border-bottom: 1px solid var(--border-color);
+  }
   & > .info {
     display: flex;
     align-items: center;
@@ -35,7 +38,7 @@ const BillWrapper = styled.li`
     border-bottom: 1px solid var(--border-color);
 
     > span {
-      margin-left: 10px;
+      margin-left: 5px;
       flex-shrink: 0;
     }
     .remark {
@@ -65,7 +68,18 @@ const BillDetails = styled.ol`
   > li {
     display: flex;
     justify-content: space-between;
-    padding: 5px;
+    padding: 5px 25px 5px 25px;
+    font-size:12px;
+    >span{
+      flex-shrink:1;
+      width:60%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      &:nth-child(2){
+        width:40%;
+        text-align:right;
+      }
+    }
   }
 `;
 type Props = {
@@ -120,6 +134,7 @@ const BillSection = (props: Props) => {
           return (
             <BillWrapper
               key={index}
+              className={bill.tagId === selectedId ? "selected" : ""}
               onClick={() => {
                 setSelectedId(bill.tagId === selectedId ? -1 : bill.tagId);
               }}
@@ -130,7 +145,7 @@ const BillSection = (props: Props) => {
                   {bill.name}（{bill.children.length}次）
                 </span>
                 <span></span>
-                <span className="bill-amount">共{bill.amount}元</span>
+                <span className="bill-amount">{bill.amount}元</span>
                 <Icon
                   className="ex-icon"
                   name={bill.tagId === selectedId ? "top" : "bottom"}
@@ -144,11 +159,9 @@ const BillSection = (props: Props) => {
                       return (
                         <li key={billIndex}>
                           <span>
-                            {moment(record.createdDate).format("YYYY年M月D日")}
+                            {moment(record.createdDate).format("YYYY.M.D")}（{record.note}）
                           </span>
-                          <span>{record.note}</span>
                           <span>
-                            {record.category === "-" ? "支出" : "收入"}
                             {record.amount}元
                           </span>
                         </li>
