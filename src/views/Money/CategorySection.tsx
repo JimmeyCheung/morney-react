@@ -19,6 +19,7 @@ const Wrapper = styled.section`
       background: var(--skin-color);
       color: #000;
       text-align: center;
+      cursor:pointer;
       &.selected {
         background: #000;
         color: var(--skin-color);

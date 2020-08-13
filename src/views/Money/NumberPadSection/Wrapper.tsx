@@ -11,6 +11,7 @@ const Wrapper = styled.section`
       height: 64px;
       border: 1px solid var(--border-color);
       background: #fff;
+      cursor:pointer;
       
       &:active {
         background: var(--skin-color);

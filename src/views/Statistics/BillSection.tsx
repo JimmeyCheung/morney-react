@@ -26,6 +26,7 @@ const BillWrapper = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor:pointer;
   & > .info {
     display: flex;
     align-items: center;
@@ -153,11 +154,12 @@ const BillSection = (props: Props) => {
                         </li>
                       );
                     }
+                    return "";
                   })}
                 </BillDetails>
               ) : (
-                ""
-              )}
+                  ""
+                )}
             </BillWrapper>
           );
         })}
