@@ -157,7 +157,7 @@ const BillSection = (props: Props) => {
                     const record = records.find((record) => record.id === id);
                     if (record) {
                       return (
-                        <li key={billIndex}>
+                        <li key={billIndex} onClick={(e) => { e.stopPropagation() }}>
                           <span>
                             {moment(record.createdDate).format("YYYY.M.D")}（{record.note}）
                           </span>
