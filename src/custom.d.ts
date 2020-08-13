@@ -8,6 +8,7 @@ type Tag = {
     category: Category;
 };
 type RecordItem = {
+    id: number;
     tagIds: number[];
     note: string;
     category: "+" | "-";
@@ -16,7 +17,8 @@ type RecordItem = {
 };
 type ChartData = {
     xAxis: string[];
-    series: number[];
+    series: Sery[] | undefined;
     totalAmount: number;
     averageAmount: number;
 }
+type Sery = { name: string; value: number }

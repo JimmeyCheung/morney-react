@@ -25,7 +25,7 @@ const tabReducer = (
   action: { tabValue: DateTypeEnum; records: RecordItem[] }
 ) => {
   let xAxis = [],
-    series = [];
+    series: Sery[] = [];
   totalAmount = averageAmount = 0;
   const { tabValue, records } = action;
   const { startDate } = getDateRange(tabValue);
@@ -34,7 +34,10 @@ const tabReducer = (
       xAxis = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
       for (let i = 0; i < xAxis.length; i++) {
         const date = moment(startDate).add(i, "d");
-        series.push(getAmountByDate(records, date));
+        series.push({
+          name: date.format("YYYY.M.D"),
+          value: getAmountByDate(records, date),
+        });
       }
       break;
     case DateTypeEnum.month:
@@ -42,14 +45,20 @@ const tabReducer = (
       for (let i = 1; i <= monthDays; i++) {
         const date = moment(startDate).add(i, "d");
         xAxis.push(i.toString());
-        series.push(getAmountByDate(records, date));
+        series.push({
+          name: date.format("YYYY.M.D"),
+          value: getAmountByDate(records, date),
+        });
       }
       break;
     case DateTypeEnum.year:
       for (let i = 0; i < 12; i++) {
         const date = moment(startDate).add(i, "M");
         xAxis.push(`${i + 1}月`);
-        series.push(getAmountByDate(records, date, "YYYY-MM"));
+        series.push({
+          name: date.format("YYYY.M.D"),
+          value: getAmountByDate(records, date),
+        });
       }
       break;
     default:

@@ -49,14 +49,14 @@ const ChartsSection = (props: Props) => {
         subtextStyle: { color: "#a8a3a3" },
       },
       grid: {
-        left: "5px", // 与容器左侧的距离
-        right: "5px", // 与容器右侧的距离
+        left: "5px",
+        right: "5px",
         bottom: 0,
         containLabel: true,
       },
       tooltip: {
         trigger: "axis",
-        formatter: "{c}元",
+        formatter: `{b}${categoryName}{c}元`,
       },
       xAxis: {
         type: "category",

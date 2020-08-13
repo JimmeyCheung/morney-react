@@ -15,6 +15,7 @@ const MyLayout = styled(Layout)`
   flex-direction: column;
 `;
 const defaultFormData = {
+  id: 0,
   tagIds: [] as number[],
   note: "",
   category: "-" as Category,
@@ -31,9 +32,6 @@ const Money = () => {
   const { addRecord } = useRecords();
   const [modalState, setModalState] = useState(false);
   const onChange = (obj: Partial<typeof selected>) => {
-    // 切换目录，刷新tags列表
-    if (obj.hasOwnProperty("category")) {
-    }
     setSelected({ ...selected, ...obj });
   };
   const submit = () => {

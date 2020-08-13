@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUpdate } from "./useUpdate";
 import { message } from "antd";
+import { createId } from "lib/createId";
 
 export const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
@@ -20,7 +21,7 @@ export const useRecords = () => {
       message.warning("请选择标签");
       return false;
     }
-    const record = { ...newRecord };
+    const record = { ...newRecord, id: createId() };
     setRecords([...records, record]);
     return true;
   };
