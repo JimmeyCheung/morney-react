@@ -61,6 +61,16 @@ const tabReducer = (
         });
       }
       break;
+    case DateTypeEnum.custom:
+      for (let i = 0; i < 12; i++) {
+        const date = moment(startDate).add(i, "M");
+        xAxis.push(`${i + 1}月`);
+        series.push({
+          name: date.format("YYYY.M.D"),
+          value: getAmountByDate(records, date),
+        });
+      }
+      break;
     default:
       throw new Error("未匹配到数据");
   }

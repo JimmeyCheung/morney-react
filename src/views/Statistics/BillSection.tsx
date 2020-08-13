@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useTags } from "hooks/useTags";
 import Icon from "components/Icon";
 import moment from "moment";
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.section`
   display: flex;
@@ -65,7 +66,7 @@ const BillDetails = styled.ol`
   display: flex;
   width: 100%;
   flex-direction: column;
-  > li {
+  li {
     display: flex;
     justify-content: space-between;
     padding: 5px 25px 5px 25px;
@@ -157,14 +158,16 @@ const BillSection = (props: Props) => {
                     const record = records.find((record) => record.id === id);
                     if (record) {
                       return (
-                        <li key={billIndex} onClick={(e) => { e.stopPropagation() }}>
-                          <span>
-                            {moment(record.createdDate).format("YYYY.M.D")}（{record.note}）
+                        <Link to={"/Statistics/" + id}>
+                          <li key={billIndex} onClick={(e) => { e.stopPropagation() }}>
+                            <span>
+                              {moment(record.createdDate).format("YYYY.M.D")}（{record.note}）
                           </span>
-                          <span>
-                            {record.amount}元
+                            <span>
+                              {record.amount}元
                           </span>
-                        </li>
+                          </li>
+                        </Link>
                       );
                     }
                     return "";

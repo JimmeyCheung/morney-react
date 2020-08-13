@@ -15,6 +15,7 @@ import { ConfigProvider } from "antd";
 import zhCN from "antd/es/locale/zh_CN"; // 引入语言包
 import moment from "moment";
 import "moment/locale/zh-cn";
+import { RecordDetail } from 'views/Statistics/RecordDetail';
 moment.locale("zh-cn");
 
 const AppWrapper = styled.div`
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route exact path="/statistics">
               <Statistics />
+            </Route>
+            <Route exact path="/statistics/:id">
+              <RecordDetail />
             </Route>
             <Redirect exact from="/" to="/money" />
             <Route exact path="/tags/:id">

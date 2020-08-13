@@ -2,5 +2,6 @@
 export enum DateTypeEnum {
     week,
     month,
-    year
+    year,
+    custom
 }

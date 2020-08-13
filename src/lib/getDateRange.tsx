@@ -16,6 +16,10 @@ const getDateRange = (dateType: DateTypeEnum) => {
       startDate = moment(moment().format("YYYY")); //年初
       endDate = moment(startDate).add(1, "y").add(-1); //年末
       break;
+    case DateTypeEnum.custom:
+      startDate = moment(moment().format("YYYY")); //年初
+      endDate = moment(startDate).add(1, "y").add(-1); //年末
+      break;
     default:
       break;
   }
