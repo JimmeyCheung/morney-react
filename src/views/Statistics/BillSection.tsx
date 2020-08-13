@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { useTags } from "hooks/useTags";
 import Icon from "components/Icon";
+import moment from "moment";
 
 const Wrapper = styled.section`
   display: flex;
@@ -55,21 +56,38 @@ const BillWrapper = styled.li`
       }
     }
   }
-  & > .amount {
+`;
+const BillDetails = styled.ol`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  > li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
   }
 `;
 type Props = {
   records: RecordItem[];
 };
+type Bill = {
+  tagId: number;
+  amount: number;
+  icon: string;
+  name: string;
+  note: string;
+  children: number[];
+};
 const BillSection = (props: Props) => {
   const { findTag } = useTags();
   const { records } = props;
   const getBillList = () => {
-    let billList: any[] = [];
+    let billList: Bill[] = [];
     records.forEach((record) => {
       const {
         id,
         amount,
+        note,
         tagIds: [tagId],
       } = record;
       const { icon, name } = findTag(tagId);
@@ -83,11 +101,11 @@ const BillSection = (props: Props) => {
           tagId,
           icon,
           name,
+          note,
           children: [id],
         });
       }
     });
-    console.log(billList);
     return billList.sort((a, b) => {
       return b.amount - a.amount;
     });
@@ -107,16 +125,36 @@ const BillSection = (props: Props) => {
             >
               <div className="info">
                 <Icon className="icon" name={bill.icon} />
-                <span>{bill.name}</span>
-                <span className="remark">{bill.note}</span>
-                <span className="bill-amount">{bill.amount}元</span>
+                <span>
+                  {bill.name}（{bill.children.length}次）
+                </span>
+                <span></span>
+                <span className="bill-amount">共{bill.amount}元</span>
                 <Icon
                   className="ex-icon"
                   name={bill.tagId === selectedId ? "top" : "bottom"}
                 />
               </div>
               {bill.tagId === selectedId ? (
-                <div className="bill-children">123123123</div>
+                <BillDetails className="details">
+                  {bill.children.map((id, billIndex) => {
+                    const record = records.find((record) => record.id === id);
+                    if (record) {
+                      return (
+                        <li key={billIndex}>
+                          <span>
+                            {moment(record.createdDate).format("YYYY年M月D日")}
+                          </span>
+                          <span>{record.note}</span>
+                          <span>
+                            {record.category === "-" ? "支出" : "收入"}
+                            {record.amount}元
+                          </span>
+                        </li>
+                      );
+                    }
+                  })}
+                </BillDetails>
               ) : (
                 ""
               )}
