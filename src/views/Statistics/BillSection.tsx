@@ -18,7 +18,7 @@ const Wrapper = styled.section`
     margin: 10px;
     border-top: 1px solid var(--border-color);
     overflow: auto;
-    font-size:14px;
+    font-size: 14px;
   }
 `;
 const BillWrapper = styled.li`
@@ -28,7 +28,7 @@ const BillWrapper = styled.li`
   .icon {
     width: 20px;
     height: 20px;
-    color:var(--skin-color);
+    color: red;
   }
   & > .info {
     display: flex;
@@ -38,18 +38,18 @@ const BillWrapper = styled.li`
     margin-left: 10px;
     border-bottom: 1px solid var(--border-color);
 
-    >span{
-      flex-shrink:0;
+    > span {
+      flex-shrink: 0;
     }
-    .remark{
-      margin-left:10px;
-      font-size:14px;
-      color:#a8a3a3;
+    .remark {
+      margin-left: 10px;
+      font-size: 14px;
+      color: #a8a3a3;
     }
-    .record-amount{
-      flex-shrink:1;
-      width:100%;
-      text-align:right;
+    .record-amount {
+      flex-shrink: 1;
+      width: 100%;
+      text-align: right;
     }
   }
   & > .amount {
@@ -87,7 +87,7 @@ const BillSection = (props: Props) => {
               <div className="info">
                 <span>{record.name}</span>
                 <span className="remark">{record.note}</span>
-                <span className="record-amount">{record.amount}</span>
+                <span className="record-amount">{record.amount}元</span>
               </div>
             </BillWrapper>
           );

@@ -2,11 +2,13 @@ import styled from "styled-components";
 import { useRef } from "react";
 import React from "react";
 import { useUpdate } from "../../hooks/useUpdate";
+import { DateTypeEnum } from "../../Enums/DateTypeEnum";
 
 const echarts = require("echarts");
 type Props = {
   chartData: ChartData;
-  category: string
+  category: string;
+  selectedTab: { text: string; value: DateTypeEnum };
 };
 
 const Wrapper = styled.section`
@@ -17,18 +19,32 @@ const Wrapper = styled.section`
     height: 100%;
   }
 `;
+const getPreTitle = (tabValue: DateTypeEnum) => {
+  switch (tabValue) {
+    case DateTypeEnum.week:
+      return "本周";
+    case DateTypeEnum.month:
+      return "本月";
+    case DateTypeEnum.year:
+      return "本年度";
+    default:
+      return "";
+  }
+};
 const ChartsSection = (props: Props) => {
   const refChart = useRef(null);
-  const { xAxis, series, totalAmount, averageAmount } = props.chartData;
+  const {
+    chartData: { xAxis, series, totalAmount, averageAmount },
+    selectedTab: { value: tabValue },
+  } = props;
   let myChart: any = undefined;
-  const categoryName = props.category === '-' ? '支出' : '收入';
+  const categoryName = props.category === "-" ? "支出" : "收入";
   useUpdate(() => {
     myChart = echarts.init(refChart.current);
     myChart.setOption({
       title: {
-        text: `总${categoryName + totalAmount}元`,
-        subtext: `其中每天平均${categoryName + averageAmount
-          }元`,
+        text: `${getPreTitle(tabValue) + categoryName + totalAmount}元`,
+        subtext: `其中每天平均${categoryName + averageAmount}元`,
         textStyle: { fontWeight: "normal", fontSize: 14, color: "#a8a3a3" },
         subtextStyle: { color: "#a8a3a3" },
       },
@@ -39,20 +55,20 @@ const ChartsSection = (props: Props) => {
         containLabel: true,
       },
       tooltip: {
-        trigger: 'axis',
-        formatter: '{c}元'
+        trigger: "axis",
+        formatter: "{c}元",
       },
       xAxis: {
         type: "category",
         data: xAxis,
         axisLabel: {
-          formatter: '{value}'
+          formatter: "{value}",
         },
       },
       yAxis: {
         type: "value",
         axisLabel: {
-          formatter: '{value}元'
+          formatter: "{value}元",
         },
       },
       series: [
@@ -65,7 +81,7 @@ const ChartsSection = (props: Props) => {
     const listener = () => {
       myChart.resize();
     };
-    window.addEventListener("resize", listener);//window resize时图标宽度自适应
+    window.addEventListener("resize", listener); //window resize时图标宽度自适应
     return () => {
       window.removeEventListener("resize", listener);
     };

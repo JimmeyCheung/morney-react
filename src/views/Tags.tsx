@@ -34,12 +34,11 @@ const Footer = styled.footer`
   height: 60px;
 `;
 const IconWrap = styled.div`
-  display:flex;
-  .icon{
-    width:20px;
-    height:20px;
-    margin-right:5px;
-    color:var(--skin-color);
+  display: flex;
+  .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
   }
 `;
 const Tags = () => {
