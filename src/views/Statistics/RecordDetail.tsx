@@ -113,7 +113,7 @@ const RecordDetail = () => {
             }
         </main>
         <footer>
-            <Button>编辑</Button>
+            <Button onClick={() => { history.push("/money"); }}>编辑</Button>
             <div className="line"></div>
             <Button>删除</Button>
         </footer>
