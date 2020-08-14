@@ -5,6 +5,7 @@ import { useRecords } from 'hooks/useRecords';
 import { useTags } from 'hooks/useTags';
 import Icon from 'components/Icon';
 import moment from 'moment';
+import { Button } from 'components/Button';
 
 const Wrapper = styled.section`
     display:flex;
@@ -13,6 +14,7 @@ const Wrapper = styled.section`
     >header{
         position:relative;
         display:flex;
+        flex-shrink:0;
         height:60px;
         align-items:center;
         justify-content:center;
@@ -35,6 +37,26 @@ const Wrapper = styled.section`
         height:100%;
         padding:20px 20px;
         background:#fff;
+    }
+    >footer{
+        display:flex;
+        align-items:center;
+        height:50px;
+        border-top:1px solid var(--border-color);
+        >Button{
+            width:50%;
+            height:100%;
+            background:#fff;
+            cursor:pointer;
+            &:active{
+                background:var(--bg-color);
+            }
+        }
+        >.line{
+            width:1px;
+            height:60%;
+            background:var(--border-color);
+        }
     }
 `;
 const ItemWrapper = styled.div`
@@ -90,6 +112,11 @@ const RecordDetail = () => {
                 })
             }
         </main>
+        <footer>
+            <Button>编辑</Button>
+            <div className="line"></div>
+            <Button>删除</Button>
+        </footer>
     </Wrapper>);
 
 }
