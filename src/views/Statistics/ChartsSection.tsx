@@ -13,7 +13,7 @@ type Props = {
 
 const Wrapper = styled.section`
   width: 100%;
-  height: 250px;
+  height: 230px;
   padding: 10px;
   & > .chart {
     height: 100%;

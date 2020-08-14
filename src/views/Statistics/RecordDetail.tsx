@@ -9,7 +9,7 @@ const Wrapper = styled.section`
     >header{
         position:relative;
         display:flex;
-        height:50px;
+        height:60px;
         align-items:center;
         justify-content:center;
         background:var(--skin-color);

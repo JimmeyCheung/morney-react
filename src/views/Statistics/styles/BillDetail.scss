@@ -1,0 +1,17 @@
+.bill-enter {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.bill-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 200ms, transform 200ms;
+}
+.bill-exit {
+  opacity: 1;
+}
+.bill-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 200ms, transform 200ms;
+}

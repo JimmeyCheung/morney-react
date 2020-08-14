@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 const Wrapper = styled.section`
   display: flex;
+  height:60px;
   justify-content: center;
   font-size: 18px;
   background-color: var(--skin-color);
@@ -14,7 +15,9 @@ const Wrapper = styled.section`
     border-radius: 6px;
     overflow: hidden;
     > li {
-      padding: 8px 0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
       width: 50%;
       background: var(--skin-color);
       color: #000;
