@@ -37,7 +37,13 @@ const Money = () => {
   const submit = () => {
     if (addRecord(selected)) {
       message.success("保存成功");
-      setSelected(defaultFormData);
+      setSelected({
+        ...selected,
+        id: 0,
+        tagIds: [],
+        note: "",
+        amount: 0
+      });
     }
   };
   return (
