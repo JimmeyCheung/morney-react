@@ -21,6 +21,10 @@ const Topbar = styled.header`
   height:60px;
   padding-left:14px;
   background: var(--skin-color);
+  .icon{
+    width:24px;
+    height:24px;
+  }
 `;
 const InputWrapper = styled.div`
   background: white;
