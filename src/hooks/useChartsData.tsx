@@ -57,7 +57,7 @@ const tabReducer = (
         xAxis.push(`${i + 1}月`);
         series.push({
           name: date.format("YYYY.M.D"),
-          value: getAmountByDate(records, date),
+          value: getAmountByDate(records, date, "YYYY-MM"),
         });
       }
       break;
