@@ -39,6 +39,7 @@ const Wrapper = styled.section`
         height:100%;
         padding:20px 20px;
         background:#fff;
+        overflow:auto;
     }
     >footer{
         display:flex;
@@ -66,8 +67,13 @@ const ItemWrapper = styled.div`
     border-bottom:1px solid var(--border-color);
     padding:10px;
     >.title{
+        flex-shrink:0;
         padding-right:30px;
         color:#8c8a8a;
+    }
+    >.content{
+        word-wrap:break-word; 
+        word-break:break-all; 
     }
 `;
 const getDay = (dayNumber: number) => {

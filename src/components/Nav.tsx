@@ -48,7 +48,7 @@ const Nav = () => {
         <li>
           <NavLink to="/statistics" activeClassName="selected">
             <Icon name="report" />
-            报表
+            统计
           </NavLink>
         </li>
       </ul>

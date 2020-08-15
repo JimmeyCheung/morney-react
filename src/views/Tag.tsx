@@ -18,9 +18,9 @@ const Topbar = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  line-height: 20px;
-  padding: 14px;
-  background: white;
+  height:60px;
+  padding-left:14px;
+  background: var(--skin-color);
 `;
 const InputWrapper = styled.div`
   background: white;
@@ -40,50 +40,50 @@ const Tag: React.FC = () => {
     name: string;
     category: Category;
   }) => (
-    <div>
-      <InputWrapper>
-        <Input
-          label="标签名"
-          type="text"
-          placeholder="标签名"
-          value={tag.name}
-          onChange={(e) => {
-            updateTag({ ...tag, name: e.target.value });
-          }}
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <Label>
-          <span>标签类别</span>
-          <select
-            defaultValue={tag.category}
+      <div>
+        <InputWrapper>
+          <Input
+            label="标签名"
+            type="text"
+            placeholder="标签名"
+            value={tag.name}
             onChange={(e) => {
-              let category = e.target.value as Category;
-              updateTag({ ...tag, category });
+              updateTag({ ...tag, name: e.target.value });
+            }}
+          />
+        </InputWrapper>
+        <InputWrapper>
+          <Label>
+            <span>标签类别</span>
+            <select
+              defaultValue={tag.category}
+              onChange={(e) => {
+                let category = e.target.value as Category;
+                updateTag({ ...tag, category });
+              }}
+            >
+              <option value="+">收入</option>
+              <option value="-">支出</option>
+            </select>
+          </Label>
+        </InputWrapper>
+        <Center>
+          <Space />
+          <Space />
+          <Space />
+          <Button
+            onClick={() => {
+              if (deleteTag(tag.id)) {
+                message.success("删除成功");
+                history.goBack();
+              }
             }}
           >
-            <option value="+">收入</option>
-            <option value="-">支出</option>
-          </select>
-        </Label>
-      </InputWrapper>
-      <Center>
-        <Space />
-        <Space />
-        <Space />
-        <Button
-          onClick={() => {
-            if (deleteTag(tag.id)) {
-              message.success("删除成功");
-              history.goBack();
-            }
-          }}
-        >
-          删除标签
+            删除标签
         </Button>
-      </Center>
-    </div>
-  );
+        </Center>
+      </div>
+    );
   return (
     <Layout>
       <Topbar>
