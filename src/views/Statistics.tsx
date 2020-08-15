@@ -70,6 +70,7 @@ const Statistics = () => {
     <MyLayout>
       <CategoryWrapper>
         <CategorySection
+          isUpdate={false}
           value={category}
           onChange={(value) => setCategory(value)}
         />

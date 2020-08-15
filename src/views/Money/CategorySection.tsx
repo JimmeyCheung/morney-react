@@ -1,12 +1,28 @@
 import styled from "styled-components";
 import React, { useState } from "react";
+import Icon from 'components/Icon';
+import { useHistory } from 'react-router-dom';
 
 const Wrapper = styled.section`
+  position:relative;
   display: flex;
   height:60px;
   justify-content: center;
   font-size: 18px;
   background-color: var(--skin-color);
+  >.back{
+    position:absolute;
+    left:10px;
+    top:0;
+    display:flex;
+    align-items:center;
+    height:100%;
+    .icon{
+      width:24px;
+      height:24px;
+      cursor:pointer;
+    }
+  }
   > ul {
     display: flex;
     margin: 10px 0;
@@ -39,6 +55,7 @@ const Wrapper = styled.section`
   }
 `;
 type Props = {
+  isUpdate: boolean;
   value: "-" | "+";
   onChange: (value: "-" | "+") => void;
 };
@@ -46,9 +63,14 @@ type Props = {
 const CategorySection: React.FC<Props> = (props) => {
   const categoryMap = { "-": "支出", "+": "收入" };
   const [categoryList] = useState<("+" | "-")[]>(["-", "+"]);
+  const history = useHistory();
   const category = props.value;
   return (
     <Wrapper>
+      {props.isUpdate ?
+        (<div className="back">
+          <Icon onClick={() => { history.goBack() }} name="left" />
+        </div>) : ""}
       <ul>
         {categoryList.map((c) => (
           <li

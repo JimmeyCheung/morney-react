@@ -10,7 +10,7 @@ import moment from "moment";
 import { TagModal } from "components/TagModal";
 import { message } from "antd";
 import { useTags } from "hooks/useTags";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
@@ -35,7 +35,6 @@ const Money = () => {
   const { tags, addTag } = useTags();
   const { records, addRecord, updateRecord } = useRecords();
   const [modalState, setModalState] = useState(false);
-  const history = useHistory();
   let { id: idString } = useParams<Params>();
   const isUpdate = !!idString; // 是否编辑模式
   useEffect(() => {
@@ -44,9 +43,6 @@ const Money = () => {
       setSelected({ ...editRecord || defaultFormData });
     }
   }, [records])
-  // const onClickBack = () => {
-  //   history.goBack();
-  // };
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({ ...selected, ...obj });
   };
@@ -67,6 +63,7 @@ const Money = () => {
       <MyLayout>
         <CategoryWrapper>
           <CategorySection
+            isUpdate={isUpdate}
             value={selected.category}
             onChange={(category) => onChange({ category })}
           />
