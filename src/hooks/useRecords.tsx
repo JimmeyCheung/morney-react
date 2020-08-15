@@ -13,6 +13,37 @@ export const useRecords = () => {
   }, records);
 
   const addRecord = (newRecord: RecordItem) => {
+    if (!checkRecord(newRecord)) {
+      return false;
+    }
+    const record = { ...newRecord, id: createId() };
+    setRecords([...records, record]);
+    return true;
+  };
+  const updateRecord = (newRecord: RecordItem) => {
+    if (!newRecord) {
+      message.error("修改的记录不存在，请刷新页面重试");
+      return false;
+    }
+    if (!checkRecord(newRecord)) {
+      return false;
+    }
+    records.find(v => {
+      if (v.id === newRecord.id) {
+        Object.assign(v, newRecord);
+        return true;
+      }
+      return false;
+    })
+    setRecords([...records]);
+    return true;
+  }
+  const deleteRecord = (recordId: number) => {
+    const newRecords = records.filter(v => v.id !== recordId);
+    setRecords(newRecords);
+    return true;
+  }
+  const checkRecord = (newRecord: RecordItem) => {
     if (newRecord.amount <= 0) {
       message.warning("请输入金额");
       return false;
@@ -21,15 +52,8 @@ export const useRecords = () => {
       message.warning("请选择标签");
       return false;
     }
-    const record = { ...newRecord, id: createId() };
-    setRecords([...records, record]);
-    return true;
-  };
-  const deleteRecord = (recordId: number) => {
-    const newRecords = records.filter(v => v.id !== recordId);
-    setRecords(newRecords);
     return true;
   }
 
-  return { records, addRecord, deleteRecord };
+  return { records, addRecord, updateRecord, deleteRecord };
 };

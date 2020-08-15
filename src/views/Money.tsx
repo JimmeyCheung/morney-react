@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import styled from "styled-components";
 import { TagsSection } from "./Money/TagsSection";
@@ -10,12 +10,13 @@ import moment from "moment";
 import { TagModal } from "components/TagModal";
 import { message } from "antd";
 import { useTags } from "hooks/useTags";
+import { useParams, useHistory } from "react-router-dom";
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
 const defaultFormData = {
-  id: 0,
+  id: -1,
   tagIds: [] as number[],
   note: "",
   category: "-" as Category,
@@ -25,21 +26,36 @@ const defaultFormData = {
 const CategoryWrapper = styled.div`
   background: #c4c4c4;
 `;
+type Params = {
+  id: string;
+};
 
 const Money = () => {
   const [selected, setSelected] = useState(defaultFormData);
   const { tags, addTag } = useTags();
-  const { addRecord } = useRecords();
+  const { records, addRecord, updateRecord } = useRecords();
   const [modalState, setModalState] = useState(false);
+  const history = useHistory();
+  let { id: idString } = useParams<Params>();
+  const isUpdate = !!idString; // 是否编辑模式
+  useEffect(() => {
+    if (isUpdate) {
+      const editRecord = records.find(v => v.id === parseInt(idString));
+      setSelected({ ...editRecord || defaultFormData });
+    }
+  }, [records])
+  // const onClickBack = () => {
+  //   history.goBack();
+  // };
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({ ...selected, ...obj });
   };
   const submit = () => {
-    if (addRecord(selected)) {
+    if (isUpdate ? updateRecord(selected) : addRecord(selected)) {
       message.success("保存成功");
       setSelected({
         ...selected,
-        id: 0,
+        id: -1,
         tagIds: [],
         note: "",
         amount: 0

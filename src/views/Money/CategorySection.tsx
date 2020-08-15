@@ -10,22 +10,30 @@ const Wrapper = styled.section`
   > ul {
     display: flex;
     margin: 10px 0;
-    border: 1px solid #000;
-    width: 80%;
-    border-radius: 6px;
+    width: 70%;
     overflow: hidden;
+    background: var(--skin-color);
     > li {
       display:flex;
       justify-content:center;
       align-items:center;
       width: 50%;
-      background: var(--skin-color);
+      border: 1px solid #000;
+      border-radius: 6px;
       color: #000;
       text-align: center;
       cursor:pointer;
       &.selected {
         background: #000;
         color: var(--skin-color);
+      }
+      :nth-child(1){
+        border-top-right-radius:0;
+        border-bottom-right-radius:0;
+      }
+      :nth-child(2){
+        border-top-left-radius:0;
+        border-bottom-left-radius:0;
       }
     }
   }

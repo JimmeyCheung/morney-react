@@ -171,8 +171,8 @@ const BillSection = (props: Props) => {
                           <Link key={billIndex} to={"/Statistics/" + id}>
                             <li onClick={(e) => { e.stopPropagation() }}>
                               <span>
-                                {moment(record.createdDate).format("YYYY.M.D")}（{record.note}）
-                            </span>
+                                {moment(record.createdDate).format("YYYY.M.D")}{record.note ? (`（${record.note}）`) : ""}
+                              </span>
                               <span>
                                 {record.amount}元
                             </span>

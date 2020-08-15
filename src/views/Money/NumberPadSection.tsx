@@ -17,6 +17,7 @@ type Props = {
 const NumberPadSection: React.FC<Props> = (props) => {
   const [output, _setOutput] = useState(props.data.amount.toString());
   const [createdDate, _setCreatedDate] = useState(props.data.createdDate);
+  console.log(props.data.createdDate)
   const setOutput = (_output: string) => {
     if (_output.length > 16) {
       _output = _output.slice(0, 16);
@@ -47,12 +48,13 @@ const NumberPadSection: React.FC<Props> = (props) => {
   };
   useEffect(() => {
     _setOutput(props.data.amount.toString());
+    _setCreatedDate(props.data.createdDate);
   }, [props]);
   return (
     <Wrapper>
       <InputWrapper>
         <DatePicker
-          defaultValue={moment(createdDate)}
+          value={moment(createdDate)}
           inputReadOnly
           bordered={false}
           onChange={(date: any, dateString: string) => {

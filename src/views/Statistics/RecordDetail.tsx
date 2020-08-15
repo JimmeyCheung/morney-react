@@ -78,15 +78,15 @@ const ItemWrapper = styled.div`
 `;
 const getDay = (dayNumber: number) => {
     const days = [
+        "星期日",
         "星期一",
         "星期二",
         "星期三",
         "星期四",
         "星期五",
-        "星期六",
-        "星期天"
+        "星期六"
     ];
-    return days[dayNumber - 1];
+    return days[dayNumber];
 }
 
 const RecordDetail = () => {
@@ -136,7 +136,7 @@ const RecordDetail = () => {
             }
         </main>
         <footer>
-            <Button onClick={() => { history.push("/money"); }}>编辑</Button>
+            <Button onClick={() => { history.push(`/money/${id}`); }}>编辑</Button>
             <div className="line"></div>
             <Button onClick={deleteBill}>删除</Button>
         </footer>
