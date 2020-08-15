@@ -6,6 +6,7 @@ import { useTags } from 'hooks/useTags';
 import Icon from 'components/Icon';
 import moment from 'moment';
 import { Button } from 'components/Button';
+import { showConfirm } from 'components/confirm';
 
 const Wrapper = styled.section`
     display:flex;
@@ -80,6 +81,7 @@ const getDay = (dayNumber: number) => {
     ];
     return days[dayNumber - 1];
 }
+
 const RecordDetail = () => {
     let id = parseInt(useParams<{ id: string }>().id);
     const { records } = useRecords();
@@ -94,6 +96,13 @@ const RecordDetail = () => {
         { text: "时间", value: date.format("YYYY年M月D日") + " " + getDay(date.day()) },
         { text: "备注", value: record?.note }
     ];
+    const deleteRecord = () => {
+        showConfirm({
+            title: "删除",
+            content: "是否确定删除此记录？",
+            okFn: () => { },
+        })
+    };
     return (<Wrapper>
         <header>
             <Icon className="back-icon" name="left" onClick={() => { history.goBack() }} />
@@ -115,7 +124,7 @@ const RecordDetail = () => {
         <footer>
             <Button onClick={() => { history.push("/money"); }}>编辑</Button>
             <div className="line"></div>
-            <Button>删除</Button>
+            <Button onClick={deleteRecord}>删除</Button>
         </footer>
     </Wrapper>);
 

@@ -25,6 +25,9 @@ export const useRecords = () => {
     setRecords([...records, record]);
     return true;
   };
+  const deleteRecord = (recordId: number) => {
+
+  }
 
   return { records, addRecord };
 };

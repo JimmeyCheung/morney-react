@@ -1,0 +1,8 @@
+
+// 重写antd组件样式
+// 按钮样式
+.ant-btn.ant-btn-primary{
+    border-color:var(--skin-color);
+    background-color: var(--skin-color);
+    color:#000;
+}
