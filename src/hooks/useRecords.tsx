@@ -26,8 +26,10 @@ export const useRecords = () => {
     return true;
   };
   const deleteRecord = (recordId: number) => {
-
+    const newRecords = records.filter(v => v.id !== recordId);
+    setRecords(newRecords);
+    return true;
   }
 
-  return { records, addRecord };
+  return { records, addRecord, deleteRecord };
 };

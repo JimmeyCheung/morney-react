@@ -138,6 +138,7 @@ const BillSection = (props: Props) => {
         {getBillList().map((bill, index) => {
           return (
             <BillWrapper
+              key={index}
               className={bill.tagId === selectedId ? "selected" : ""}
               onClick={() => {
                 setSelectedId(bill.tagId === selectedId ? -1 : bill.tagId);
@@ -167,8 +168,8 @@ const BillSection = (props: Props) => {
                       const record = records.find((record) => record.id === id);
                       if (record) {
                         return (
-                          <Link to={"/Statistics/" + id}>
-                            <li key={billIndex} onClick={(e) => { e.stopPropagation() }}>
+                          <Link key={billIndex} to={"/Statistics/" + id}>
+                            <li onClick={(e) => { e.stopPropagation() }}>
                               <span>
                                 {moment(record.createdDate).format("YYYY.M.D")}（{record.note}）
                             </span>

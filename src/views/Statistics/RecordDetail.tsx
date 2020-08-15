@@ -7,6 +7,7 @@ import Icon from 'components/Icon';
 import moment from 'moment';
 import { Button } from 'components/Button';
 import { showConfirm } from 'components/confirm';
+import { message } from 'antd';
 
 const Wrapper = styled.section`
     display:flex;
@@ -84,7 +85,7 @@ const getDay = (dayNumber: number) => {
 
 const RecordDetail = () => {
     let id = parseInt(useParams<{ id: string }>().id);
-    const { records } = useRecords();
+    const { records, deleteRecord } = useRecords();
     const { findTag } = useTags();
     const history = useHistory();
     const record = records.find(v => v.id === id);
@@ -96,11 +97,18 @@ const RecordDetail = () => {
         { text: "时间", value: date.format("YYYY年M月D日") + " " + getDay(date.day()) },
         { text: "备注", value: record?.note }
     ];
-    const deleteRecord = () => {
+    const deleteBill = () => {
         showConfirm({
             title: "删除",
             content: "是否确定删除此记录？",
-            okFn: () => { },
+            okFn: () => {
+                if (deleteRecord(id)) {
+                    message.success("删除成功");
+                    history.goBack();
+                } else {
+                    message.error("删除异常，记录不存在");
+                }
+            },
         })
     };
     return (<Wrapper>
@@ -111,9 +119,9 @@ const RecordDetail = () => {
         </header>
         <main>
             {
-                items.map(item => {
+                items.map((item, i) => {
                     return (
-                        <ItemWrapper>
+                        <ItemWrapper key={i}>
                             <span className="title">{item.text}</span>
                             <span className="content">{item.value}</span>
                         </ItemWrapper>
@@ -124,7 +132,7 @@ const RecordDetail = () => {
         <footer>
             <Button onClick={() => { history.push("/money"); }}>编辑</Button>
             <div className="line"></div>
-            <Button onClick={deleteRecord}>删除</Button>
+            <Button onClick={deleteBill}>删除</Button>
         </footer>
     </Wrapper>);
 
