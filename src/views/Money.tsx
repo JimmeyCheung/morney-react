@@ -42,7 +42,7 @@ const Money = () => {
       const editRecord = records.find(v => v.id === parseInt(idString));
       setSelected({ ...editRecord || defaultFormData });
     }
-  }, [records])
+  }, [records, idString, isUpdate])
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({ ...selected, ...obj });
   };
