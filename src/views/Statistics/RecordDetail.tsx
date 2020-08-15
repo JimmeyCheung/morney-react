@@ -33,6 +33,9 @@ const Wrapper = styled.section`
             width:24px;
             height:24px;
         }
+        >span{
+            margin-left:10px;
+        }
     }
     >main{
         flex-shrink:1;
@@ -121,7 +124,9 @@ const RecordDetail = () => {
         <header>
             <Icon className="back-icon" name="left" onClick={() => { history.goBack() }} />
             <Icon name={tag?.icon} />
-            {tag?.name}
+            <span>
+                {tag?.name}
+            </span>
         </header>
         <main>
             {
