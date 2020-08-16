@@ -2,11 +2,20 @@
 import { DatePicker, List } from 'antd-mobile';
 import Modal from 'antd/lib/modal';
 import React, { useState } from 'react';
+import { message } from 'antd';
+import moment from 'moment';
 
 type Props = {
     visible: boolean;
     setVisible: (visible: boolean) => void,
     okFn: (startDate: Date, endDate: Date) => void
+}
+const dateCheck = (startDate: moment.Moment, endDate: moment.Moment) => {
+    if (startDate > endDate) {
+        message.error("开始时间不能大于结束时间");
+        return false;
+    }
+    return true;
 }
 const DateModal = (props: Props) => {
     const { visible, setVisible, okFn } = props;
@@ -28,7 +37,12 @@ const DateModal = (props: Props) => {
                     title="选择日期"
                     extra="Optional"
                     value={startDate}
-                    onChange={date => { setStartDate(date) }}
+                    onChange={date => {
+                        if (!dateCheck(moment(date), moment(endDate))) {
+                            return;
+                        }
+                        setStartDate(date)
+                    }}
                 >
                     <List.Item arrow="horizontal">开始时间</List.Item>
                 </DatePicker>
@@ -39,7 +53,12 @@ const DateModal = (props: Props) => {
                     title="选择日期"
                     extra="Optional"
                     value={endDate}
-                    onChange={date => { setEdnDate(date) }}
+                    onChange={date => {
+                        if (!dateCheck(moment(startDate), moment(date))) {
+                            return;
+                        }
+                        setEdnDate(date)
+                    }}
                 >
                     <List.Item arrow="horizontal">结束时间</List.Item>
                 </DatePicker>
