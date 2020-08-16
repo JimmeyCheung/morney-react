@@ -103,7 +103,7 @@ const Statistics = () => {
         chartData={chartData}
         category={category}
       />
-      <BillSection records={pageRecords} />
+      <BillSection records={pageRecords} category={category} />
       <DateModal visible={modalState} setVisible={setModalState} okFn={dateModalFinished} />
     </MyLayout>
   );

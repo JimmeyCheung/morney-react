@@ -89,6 +89,7 @@ const BillDetails = styled.ol`
 `;
 type Props = {
   records: RecordItem[];
+  category: Category;
 };
 type Bill = {
   tagId: number;
@@ -100,7 +101,7 @@ type Bill = {
 };
 const BillSection = (props: Props) => {
   const { findTag } = useTags();
-  const { records } = props;
+  const { records, category } = props;
   const getBillList = () => {
     let billList: Bill[] = [];
     records.forEach((record) => {
@@ -133,7 +134,7 @@ const BillSection = (props: Props) => {
   const [selectedId, setSelectedId] = useState(-1);
   return (
     <Wrapper>
-      <div className="title">支出排行榜</div>
+      <div className="title">{category === "+" ? "收入" : "支出"}排行榜</div>
       <ol className="bill">
         {getBillList().map((bill, index) => {
           return (
