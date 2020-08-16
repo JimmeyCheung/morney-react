@@ -10,6 +10,7 @@ import { Space } from "../components/Space";
 import { Button } from "components/Button";
 import { Label } from "components/Label";
 import { message } from "antd";
+import { showConfirm } from 'components/confirm';
 
 type Params = {
   id: string;
@@ -77,10 +78,18 @@ const Tag: React.FC = () => {
           <Space />
           <Button
             onClick={() => {
-              if (deleteTag(tag.id)) {
-                message.success("删除成功");
-                history.goBack();
-              }
+              showConfirm({
+                title: "删除",
+                content: "是否确定删除此记录？",
+                okFn: () => {
+                  if (deleteTag(tag.id)) {
+                    message.success("删除成功");
+                    history.goBack();
+                  } else {
+                    message.error("删除异常,标签不存在");
+                  }
+                },
+              })
             }}
           >
             删除标签
