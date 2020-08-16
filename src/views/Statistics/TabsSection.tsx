@@ -33,10 +33,10 @@ const Wrapper = styled.section`
 type Props = {
   tabs: { text: string; value: DateTypeEnum }[];
   tabIndex: number;
-  setTabIndex: React.Dispatch<React.SetStateAction<number>>;
+  onTabChange: (index: number) => void;
 };
 const TabsSection = (props: Props) => {
-  const { tabIndex, setTabIndex, tabs } = props;
+  const { tabIndex, onTabChange, tabs } = props;
   const getClass = (index: number) => {
     return `tab ${index === tabIndex ? "selected" : ""}`;
   };
@@ -48,7 +48,7 @@ const TabsSection = (props: Props) => {
             <div
               className={getClass(index)}
               onClick={() => {
-                setTabIndex(index);
+                onTabChange(index);
               }}
               key={index}
             >

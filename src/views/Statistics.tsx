@@ -10,6 +10,9 @@ import { useChartsData } from "hooks/useChartsData";
 import { DateTypeEnum } from "Enums/DateTypeEnum";
 import moment from "moment";
 import { getDateRange } from "lib/getDateRange";
+import { DatePicker, List } from 'antd-mobile';
+import Modal from 'antd/lib/modal';
+import 'antd-mobile/dist/antd-mobile.css'
 
 // state: 返回状态值，action：reducer的行为参数
 type ActionType = {
@@ -27,6 +30,7 @@ const tabs = [
   { text: "周", value: DateTypeEnum.week },
   { text: "月", value: DateTypeEnum.month },
   { text: "年", value: DateTypeEnum.year },
+  { text: "自定义", value: DateTypeEnum.custom },
 ];
 const recordsReducer = (
   state: RecordItem[],
@@ -65,7 +69,15 @@ const Statistics = () => {
       records: pageRecords,
     });
   }, [tabIndex, pageRecords, dispatchChart]);
-
+  // 自定义时间
+  const [startDate, setStartDate] = useState(moment());
+  const [modalState, setModalState] = useState(false);
+  const onTabChange = (index: number) => {
+    if (tabs[index].value === DateTypeEnum.custom) {
+      setModalState(true);
+    }
+    // setTabIndex(index);
+  }
   return (
     <MyLayout>
       <CategoryWrapper>
@@ -75,13 +87,44 @@ const Statistics = () => {
           onChange={(value) => setCategory(value)}
         />
       </CategoryWrapper>
-      <TabsSection tabs={tabs} tabIndex={tabIndex} setTabIndex={setTabIndex} />
+      <TabsSection tabs={tabs} tabIndex={tabIndex} onTabChange={onTabChange} />
       <ChartsSection
         selectedTab={tabs[tabIndex]}
         chartData={chartData}
         category={category}
       />
       <BillSection records={pageRecords} />
+      <Modal
+        title="自定义时间"
+        visible={modalState}
+        okText="保存"
+        cancelText="取消"
+        onOk={() => { setModalState(false) }}
+        onCancel={() => { setModalState(false) }}
+      >
+        <div>
+          <DatePicker
+            mode="date"
+            title="Select Date"
+            extra="Optional"
+            value={new Date()}
+            onChange={date => { }}
+          >
+            <List.Item arrow="horizontal">开始时间</List.Item>
+          </DatePicker>
+        </div>
+        <div>
+          <DatePicker
+            mode="date"
+            title="Select Date"
+            extra="Optional"
+            value={new Date()}
+            onChange={date => { }}
+          >
+            <List.Item arrow="horizontal">结束时间</List.Item>
+          </DatePicker>
+        </div>
+      </Modal>
     </MyLayout>
   );
 };
