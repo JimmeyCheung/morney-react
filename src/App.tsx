@@ -16,6 +16,7 @@ import zhCN from "antd/es/locale/zh_CN"; // 引入语言包
 import moment from "moment";
 import "moment/locale/zh-cn";
 import { RecordDetail } from 'views/Statistics/RecordDetail';
+import { QRCode } from 'components/QRCode';
 moment.locale("zh-cn");
 
 const AppWrapper = styled.div`
@@ -27,6 +28,7 @@ function App() {
     <ConfigProvider locale={zhCN}>
       <AppWrapper>
         <Router>
+          <QRCode />
           <Switch>
             <Route exact path="/tags">
               <Tags />
