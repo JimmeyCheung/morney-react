@@ -1,7 +1,6 @@
 
 import { DatePicker, List } from 'antd-mobile';
 import Modal from 'antd/lib/modal';
-import 'antd-mobile/dist/antd-mobile.css'
 import React, { useState } from 'react';
 
 type Props = {

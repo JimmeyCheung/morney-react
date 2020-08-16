@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Wrapper } from "./NumberPadSection/Wrapper";
 import { InputWrapper } from "./NumberPadSection/InputWrapper";
 import { generateOutput } from "./NumberPadSection/generateOutput";
-import { DatePicker } from "antd";
 import moment from "moment";
 import { useEffect } from "react";
+import { DatePicker, List } from 'antd-mobile';
 
 type Props = {
   data: {
@@ -54,13 +54,14 @@ const NumberPadSection: React.FC<Props> = (props) => {
     <Wrapper>
       <InputWrapper>
         <DatePicker
-          value={moment(createdDate)}
-          inputReadOnly
-          bordered={false}
-          onChange={(date: any, dateString: string) => {
-            setCreatedDate(dateString);
-          }}
-        />
+          mode="date"
+          title="选择日期"
+          extra="Optional"
+          value={new Date(createdDate)}
+          onChange={date => { setCreatedDate(moment(date).format("YYYY-MM-DD")); }}
+        >
+          <List.Item></List.Item>
+        </DatePicker>
         <div className="line"></div>
         <div className="output">{output}</div>
       </InputWrapper>
