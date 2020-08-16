@@ -17,7 +17,6 @@ type Props = {
 const NumberPadSection: React.FC<Props> = (props) => {
   const [output, _setOutput] = useState(props.data.amount.toString());
   const [createdDate, _setCreatedDate] = useState(props.data.createdDate);
-  console.log(props.data.createdDate)
   const setOutput = (_output: string) => {
     if (_output.length > 16) {
       _output = _output.slice(0, 16);

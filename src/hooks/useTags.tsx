@@ -61,7 +61,6 @@ const useTags = () => {
     return true;
   };
   const addTag = (data: { name: string; category: Category }) => {
-    console.log("开始添加");
     setTags([...tags, { id: createId(), icon: "other", ...data }]);
   };
   const getName = (id: number) => {
