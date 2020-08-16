@@ -10,9 +10,7 @@ import { useChartsData } from "hooks/useChartsData";
 import { DateTypeEnum } from "Enums/DateTypeEnum";
 import moment from "moment";
 import { getDateRange } from "lib/getDateRange";
-import { DatePicker, List } from 'antd-mobile';
-import Modal from 'antd/lib/modal';
-import 'antd-mobile/dist/antd-mobile.css'
+import { DateModal } from './Statistics/DateModal';
 
 // state: 返回状态值，action：reducer的行为参数
 type ActionType = {
@@ -69,15 +67,17 @@ const Statistics = () => {
       records: pageRecords,
     });
   }, [tabIndex, pageRecords, dispatchChart]);
-  // 自定义时间
-  const [startDate, setStartDate] = useState(moment());
   const [modalState, setModalState] = useState(false);
   const onTabChange = (index: number) => {
     if (tabs[index].value === DateTypeEnum.custom) {
       setModalState(true);
+    } else {
+      setTabIndex(index);
     }
-    // setTabIndex(index);
-  }
+  };
+  useEffect(() => {
+
+  }, [modalState])
   return (
     <MyLayout>
       <CategoryWrapper>
@@ -94,37 +94,7 @@ const Statistics = () => {
         category={category}
       />
       <BillSection records={pageRecords} />
-      <Modal
-        title="自定义时间"
-        visible={modalState}
-        okText="保存"
-        cancelText="取消"
-        onOk={() => { setModalState(false) }}
-        onCancel={() => { setModalState(false) }}
-      >
-        <div>
-          <DatePicker
-            mode="date"
-            title="Select Date"
-            extra="Optional"
-            value={new Date()}
-            onChange={date => { }}
-          >
-            <List.Item arrow="horizontal">开始时间</List.Item>
-          </DatePicker>
-        </div>
-        <div>
-          <DatePicker
-            mode="date"
-            title="Select Date"
-            extra="Optional"
-            value={new Date()}
-            onChange={date => { }}
-          >
-            <List.Item arrow="horizontal">结束时间</List.Item>
-          </DatePicker>
-        </div>
-      </Modal>
+      <DateModal visible={modalState} setVisible={setModalState} />
     </MyLayout>
   );
 };
