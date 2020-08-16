@@ -25,5 +25,9 @@ const InputWrapper = styled.div`
     overflow-x: auto;
     overflow-y:hidden;
   }
+  .am-list-item .am-list-line .am-list-extra{
+    flex-basis: 100%;
+    text-align: left;
+  }
 `;
 export { InputWrapper };
