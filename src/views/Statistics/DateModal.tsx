@@ -21,7 +21,7 @@ const DateModal = (props: Props) => {
     const { visible, setVisible, okFn } = props;
     // 自定义时间
     const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEdnDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
     return (
         <Modal
             title="自定义时间"
@@ -57,7 +57,7 @@ const DateModal = (props: Props) => {
                         if (!dateCheck(moment(startDate), moment(date))) {
                             return;
                         }
-                        setEdnDate(date)
+                        setEndDate(date)
                     }}
                 >
                     <List.Item arrow="horizontal">结束时间</List.Item>

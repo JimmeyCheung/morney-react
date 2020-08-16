@@ -31,7 +31,7 @@ const tabReducer = (
   state: ChartData,
   action: { tabValue: DateTypeEnum; records: RecordItem[], dateRange: DateRange }
 ) => {
-  let xAxis = [],
+  let xAxis: string[] = [],
     series: Sery[] = [];
   totalAmount = averageAmount = 0;
   const { tabValue, records, dateRange } = action;
@@ -80,7 +80,7 @@ const tabReducer = (
       } else {
         dateType = "d"
       }
-      for (let date = startDate; date <= endDate; date.add(1, dateType)) {
+      for (let date = moment(startDate); date <= endDate; date.add(1, dateType)) {
         xAxis.push(getNameByType(dateType, date));
         series.push({
           name: getNameByType(dateType, date),
@@ -92,10 +92,8 @@ const tabReducer = (
       throw new Error("未匹配到数据");
   }
   // 计算平均每日消费
-  averageAmount =
-    xAxis.length !== 0
-      ? Math.round((totalAmount * 100) / xAxis.length) / 100
-      : 0;
+  const dataCount = endDate.diff(startDate, "days") + 1;
+  averageAmount = xAxis.length !== 0 ? Math.round(totalAmount * 100 / dataCount) / 100 : 0;
   return {
     xAxis,
     series,
