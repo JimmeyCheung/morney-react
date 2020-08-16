@@ -8,7 +8,7 @@ let totalAmount = 0,
 const getAmountByDate = (
   pageRecords: RecordItem[],
   date: moment.Moment,
-  formatStr: string = "YYYY-MM-DD"
+  formatStr: string = "YYYY.MM.DD"
 ) => {
   let amount = pageRecords
     .filter(
@@ -67,7 +67,6 @@ const tabReducer = (
           value: getAmountByDate(records, date, "YYYY.MM"),
         });
       }
-      console.log(1)
       break;
     case DateTypeEnum.custom:
       let dateType: DateType = "d";
@@ -88,7 +87,6 @@ const tabReducer = (
           value: getAmountByDate(records, date, formatStr),
         });
       }
-      console.log(xAxis, series)
       break;
     default:
       throw new Error("未匹配到数据");

@@ -54,7 +54,7 @@ const Statistics = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { chartData, dispatchChart } = useChartsData();
   const [pageRecords, dispatchRecords] = useReducer(recordsReducer, []); // 页面显示过滤后的Records
-  const [dateRange, setDateRange] = useState({ startDate: moment(), endDate: moment() })
+  const [dateRange, setDateRange] = useState(getDateRange())
   useEffect(() => {
     dispatchRecords({
       records,
@@ -76,6 +76,7 @@ const Statistics = () => {
     if (tabs[index].value === DateTypeEnum.custom) {
       setModalState(true);
     } else {
+      setDateRange(getDateRange(tabs[index].value))
       setTabIndex(index);
     }
   };
