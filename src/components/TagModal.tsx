@@ -24,6 +24,7 @@ const TagModal = (props: Props) => {
     }
     props.addTag(newTag);
     message.success("添加成功");
+    setNewTag(getNewTag());
     props.hide();
   };
   const hide = () => {
