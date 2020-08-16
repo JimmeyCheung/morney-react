@@ -20,7 +20,7 @@ let importAll = (requireContext: __WebpackModuleApi.RequireContext) =>
 try {
   importAll(require.context("icons", true, /\.svg$/));
 } catch (error) {
-  console.log(error);
+  throw error;
 }
 
 const Icon = (props: Props) => {
