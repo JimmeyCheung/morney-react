@@ -1,7 +1,7 @@
 import moment from "moment";
 import { DateTypeEnum } from "Enums/DateTypeEnum";
 
-const getDateRange = (dateType: DateTypeEnum) => {
+const getDateRange = (dateType: DateTypeEnum, dateRange: DateRange) => {
   let startDate, endDate;
   switch (dateType) {
     case DateTypeEnum.week:
@@ -17,8 +17,8 @@ const getDateRange = (dateType: DateTypeEnum) => {
       endDate = moment(startDate).add(1, "y").add(-1); //年末
       break;
     case DateTypeEnum.custom:
-      startDate = moment(moment().format("YYYY")); //年初
-      endDate = moment(startDate).add(1, "y").add(-1); //年末
+      startDate = moment(dateRange.startDate).format("YYYY-MM-DD");
+      endDate = moment(dateRange.endDate).format("YYYY-MM-DD");
       break;
     default:
       break;

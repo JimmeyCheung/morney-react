@@ -3,14 +3,14 @@ import { DatePicker, List } from 'antd-mobile';
 import Modal from 'antd/lib/modal';
 import 'antd-mobile/dist/antd-mobile.css'
 import React, { useState } from 'react';
-import moment from 'moment';
 
 type Props = {
     visible: boolean;
-    setVisible: (visible: boolean) => void
+    setVisible: (visible: boolean) => void,
+    okFn: (startDate: Date, endDate: Date) => void
 }
 const DateModal = (props: Props) => {
-    const { visible, setVisible } = props;
+    const { visible, setVisible, okFn } = props;
     // 自定义时间
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEdnDate] = useState(new Date());
@@ -20,7 +20,7 @@ const DateModal = (props: Props) => {
             visible={visible}
             okText="保存"
             cancelText="取消"
-            onOk={() => { setVisible(false) }}
+            onOk={() => { okFn(startDate, endDate) }}
             onCancel={() => { setVisible(false) }}
         >
             <div>

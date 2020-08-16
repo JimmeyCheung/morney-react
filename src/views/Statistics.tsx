@@ -17,6 +17,7 @@ type ActionType = {
   records: RecordItem[];
   category: Category;
   tabValue: DateTypeEnum;
+  dateRange: DateRange
 };
 const MyLayout = styled(Layout)`
   background: #fff;
@@ -30,11 +31,12 @@ const tabs = [
   { text: "年", value: DateTypeEnum.year },
   { text: "自定义", value: DateTypeEnum.custom },
 ];
+// 根据时间筛选账本记录
 const recordsReducer = (
   state: RecordItem[],
-  { records, category, tabValue }: ActionType
+  { records, category, tabValue, dateRange }: ActionType
 ) => {
-  const { startDate, endDate } = getDateRange(tabValue);
+  const { startDate, endDate } = getDateRange(tabValue, dateRange);
   const pageRecords = records.filter((record) => {
     return (
       record.category === category &&
@@ -52,21 +54,23 @@ const Statistics = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { chartData, dispatchChart } = useChartsData();
   const [pageRecords, dispatchRecords] = useReducer(recordsReducer, []); // 页面显示过滤后的Records
-
+  const [dateRange, setDateRange] = useState({ startDate: moment(), endDate: moment() })
   useEffect(() => {
     dispatchRecords({
       records,
       category,
       tabValue: getTabVal(tabIndex),
+      dateRange
     });
-  }, [tabIndex, category, records]);
+  }, [tabIndex, category, records, dateRange]);
 
   useEffect(() => {
     dispatchChart({
       tabValue: getTabVal(tabIndex),
       records: pageRecords,
+      dateRange
     });
-  }, [tabIndex, pageRecords, dispatchChart]);
+  }, [pageRecords]);
   const [modalState, setModalState] = useState(false);
   const onTabChange = (index: number) => {
     if (tabs[index].value === DateTypeEnum.custom) {
@@ -75,9 +79,14 @@ const Statistics = () => {
       setTabIndex(index);
     }
   };
-  useEffect(() => {
-
-  }, [modalState])
+  const dateModalFinished = (startDate: Date, endDate: Date) => {
+    setDateRange({
+      startDate: moment(startDate),
+      endDate: moment(endDate)
+    });
+    setTabIndex(DateTypeEnum.custom);
+    setModalState(false);
+  };
   return (
     <MyLayout>
       <CategoryWrapper>
@@ -94,7 +103,7 @@ const Statistics = () => {
         category={category}
       />
       <BillSection records={pageRecords} />
-      <DateModal visible={modalState} setVisible={setModalState} />
+      <DateModal visible={modalState} setVisible={setModalState} okFn={dateModalFinished} />
     </MyLayout>
   );
 };

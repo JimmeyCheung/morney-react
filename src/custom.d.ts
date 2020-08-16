@@ -22,3 +22,8 @@ type ChartData = {
     averageAmount: number;
 }
 type Sery = { name: string; value: number }
+
+type DateRange = {
+    startDate: moment.Moment,
+    endDate: moment.Moment
+};

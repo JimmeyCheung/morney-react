@@ -1,8 +1,8 @@
 import moment from "moment";
 import { useReducer } from "react";
 import { DateTypeEnum } from "Enums/DateTypeEnum";
-import { getDateRange } from "lib/getDateRange";
 
+type DateType = "y" | "M" | "d";
 let totalAmount = 0,
   averageAmount = 0;
 const getAmountByDate = (
@@ -20,15 +20,22 @@ const getAmountByDate = (
   totalAmount += amount;
   return amount;
 };
+const getNameByType = (dateType: DateType, date: moment.Moment) => {
+  switch (dateType) {
+    case "y": return date.format("YYYY年");
+    case "M": return date.format("M月");
+    case "d": return date.format("YYYY年M月D日");
+  }
+}
 const tabReducer = (
   state: ChartData,
-  action: { tabValue: DateTypeEnum; records: RecordItem[] }
+  action: { tabValue: DateTypeEnum; records: RecordItem[], dateRange: DateRange }
 ) => {
   let xAxis = [],
     series: Sery[] = [];
   totalAmount = averageAmount = 0;
-  const { tabValue, records } = action;
-  const { startDate } = getDateRange(tabValue);
+  const { tabValue, records, dateRange } = action;
+  const { startDate, endDate } = dateRange;
   switch (tabValue) {
     case DateTypeEnum.week:
       xAxis = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
@@ -57,19 +64,31 @@ const tabReducer = (
         xAxis.push(`${i + 1}月`);
         series.push({
           name: date.format("YYYY.M.D"),
-          value: getAmountByDate(records, date, "YYYY-MM"),
+          value: getAmountByDate(records, date, "YYYY.MM"),
         });
       }
+      console.log(1)
       break;
     case DateTypeEnum.custom:
-      for (let i = 0; i < 12; i++) {
-        const date = moment(startDate).add(i, "M");
-        xAxis.push(`${i + 1}月`);
+      let dateType: DateType = "d";
+      let formatStr = "YYYY.M.D"
+      if (endDate.year() - startDate.year() > 0) {
+        dateType = "y"
+        formatStr = "YYYY"
+      } else if (endDate.month() - startDate.month() > 0) {
+        dateType = "M"
+        formatStr = "YYYY.M"
+      } else {
+        dateType = "d"
+      }
+      for (let date = startDate; date <= endDate; date.add(1, dateType)) {
+        xAxis.push(getNameByType(dateType, date));
         series.push({
-          name: date.format("YYYY.M.D"),
-          value: getAmountByDate(records, date),
+          name: getNameByType(dateType, date),
+          value: getAmountByDate(records, date, formatStr),
         });
       }
+      console.log(xAxis, series)
       break;
     default:
       throw new Error("未匹配到数据");
