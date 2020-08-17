@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import React from 'react';
-import Icon from './Icon';
-import styled from 'styled-components';
+import { useState } from "react";
+import React from "react";
+import Icon from "./Icon";
+import styled from "styled-components";
+import imgQRCode from "assets/images/QRCode.png";
 
 const Wrapper = styled.div`
   display: none;
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
     width: 300px;
     height: 300px;
     margin: auto;
-    background: url("/QRCode.png") center/100% 100%;
+    background: url(${imgQRCode}) center/100% 100%;
   }
 
   .tips {
@@ -56,12 +57,18 @@ const QRCode = () => {
       <div className="QR-code">
         <div className="tips">
           为了保证你的浏览效果，请扫描下方二维码使用手机浏览
-                        <div title="关闭" className="close" onClick={() => { setVisible(false) }}>
+          <div
+            title="关闭"
+            className="close"
+            onClick={() => {
+              setVisible(false);
+            }}
+          >
             <Icon name="close" />
           </div>
         </div>
       </div>
-    </Wrapper >
-  )
-}
-export { QRCode }
+    </Wrapper>
+  );
+};
+export { QRCode };
