@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useTags } from "hooks/useTags";
 import Icon from "components/Icon";
 import moment from "moment";
-import { Link } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
+import { Link } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 import "./styles/BillDetail.scss";
 
 const Wrapper = styled.section`
@@ -29,8 +29,8 @@ const BillWrapper = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor:pointer;
-  &.selected{
+  cursor: pointer;
+  &.selected {
     border-bottom: 1px solid var(--border-color);
   }
   & > .info {
@@ -68,22 +68,33 @@ const BillDetails = styled.ol`
   display: flex;
   width: 100%;
   flex-direction: column;
-  padding-bottom:5px;
-  background:var(--bg-color);
+  padding-bottom: 5px;
+  background: var(--bg-color);
   li {
     display: flex;
     justify-content: space-between;
-    padding: 5px 25px 0 25px;
-    font-size:12px;
-    >span{
-      flex-shrink:1;
-      width:60%;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      &:nth-child(2){
-        width:40%;
-        text-align:right;
+    padding: 5px 0 0 25px;
+    font-size: 12px;
+    > span {
+      display: flex;
+      align-items: center;
+      flex-shrink: 1;
+      width: 60%;
+      height: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &:nth-child(2) {
+        flex-direction: row-reverse;
+        width: 40%;
+        text-align: right;
       }
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 10px;
+      color: black;
     }
   }
 `;
@@ -163,34 +174,36 @@ const BillSection = (props: Props) => {
                 classNames="bill"
                 unmountOnExit
               >
-                <BillDetails className="details" >
-                  {
-                    bill.children.map((id, billIndex) => {
-                      const record = records.find((record) => record.id === id);
-                      if (record) {
-                        return (
-                          <Link key={billIndex} to={"/Statistics/" + id}>
-                            <li onClick={(e) => { e.stopPropagation() }}>
-                              <span>
-                                {moment(record.createdDate).format("YYYY.M.D")}{record.note ? (`（${record.note}）`) : ""}
-                              </span>
-                              <span>
-                                {record.amount}元
+                <BillDetails className="details">
+                  {bill.children.map((id, billIndex) => {
+                    const record = records.find((record) => record.id === id);
+                    if (record) {
+                      return (
+                        <Link key={billIndex} to={"/Statistics/" + id}>
+                          <li
+                            onClick={(e) => {
+                              e.stopPropagation();
+                            }}
+                          >
+                            <span>
+                              {moment(record.createdDate).format("YYYY.M.D")}
+                              {record.note ? `（${record.note}）` : ""}
                             </span>
-                            </li>
-                          </Link>
-                        );
-                      }
-                      return "";
-                    })
-                  }
+                            <span>{record.amount}元</span>
+                            <Icon name="edit" className="ex-icon" />
+                          </li>
+                        </Link>
+                      );
+                    }
+                    return "";
+                  })}
                 </BillDetails>
               </CSSTransition>
             </BillWrapper>
           );
         })}
       </ol>
-    </Wrapper >
+    </Wrapper>
   );
 };
 export { BillSection };
