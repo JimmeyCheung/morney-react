@@ -10,14 +10,14 @@ import { useChartsData } from "hooks/useChartsData";
 import { DateTypeEnum } from "Enums/DateTypeEnum";
 import moment from "moment";
 import { getDateRange } from "lib/getDateRange";
-import { DateModal } from './Statistics/DateModal';
+import { DateModal } from "./Statistics/DateModal";
 
 // state: 返回状态值，action：reducer的行为参数
 type ActionType = {
   records: RecordItem[];
   category: Category;
   tabValue: DateTypeEnum;
-  dateRange: DateRange
+  dateRange: DateRange;
 };
 const MyLayout = styled(Layout)`
   background: #fff;
@@ -54,13 +54,13 @@ const Statistics = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const { chartData, dispatchChart } = useChartsData();
   const [pageRecords, dispatchRecords] = useReducer(recordsReducer, []); // 页面显示过滤后的Records
-  const [dateRange, setDateRange] = useState(getDateRange())
+  const [dateRange, setDateRange] = useState(getDateRange());
   useEffect(() => {
     dispatchRecords({
       records,
       category,
       tabValue: getTabVal(tabIndex),
-      dateRange
+      dateRange,
     });
   }, [tabIndex, category, records, dateRange]);
 
@@ -68,7 +68,7 @@ const Statistics = () => {
     dispatchChart({
       tabValue: getTabVal(tabIndex),
       records: pageRecords,
-      dateRange
+      dateRange,
     });
   }, [pageRecords]);
   const [modalState, setModalState] = useState(false);
@@ -76,14 +76,14 @@ const Statistics = () => {
     if (tabs[index].value === DateTypeEnum.custom) {
       setModalState(true);
     } else {
-      setDateRange(getDateRange(tabs[index].value))
+      setDateRange(getDateRange(tabs[index].value));
       setTabIndex(index);
     }
   };
   const dateModalFinished = (startDate: Date, endDate: Date) => {
     setDateRange({
       startDate: moment(startDate),
-      endDate: moment(endDate)
+      endDate: moment(endDate),
     });
     setTabIndex(DateTypeEnum.custom);
     setModalState(false);
@@ -104,7 +104,11 @@ const Statistics = () => {
         category={category}
       />
       <BillSection records={pageRecords} category={category} />
-      <DateModal visible={modalState} setVisible={setModalState} okFn={dateModalFinished} />
+      <DateModal
+        visible={modalState}
+        setVisible={setModalState}
+        okFn={dateModalFinished}
+      />
     </MyLayout>
   );
 };

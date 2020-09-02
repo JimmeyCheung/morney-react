@@ -23,6 +23,9 @@ const defaultFormData = {
   amount: 0,
   createdDate: moment(new Date()).format("YYYY-MM-DD"),
 };
+const Wrapper = styled.div`
+  height: 100%;
+`;
 const CategoryWrapper = styled.div`
   background: #c4c4c4;
 `;
@@ -39,10 +42,10 @@ const Money = () => {
   const isUpdate = !!idString; // 是否编辑模式
   useEffect(() => {
     if (isUpdate) {
-      const editRecord = records.find(v => v.id === parseInt(idString));
-      setSelected({ ...editRecord || defaultFormData });
+      const editRecord = records.find((v) => v.id === parseInt(idString));
+      setSelected({ ...(editRecord || defaultFormData) });
     }
-  }, [records, idString, isUpdate])
+  }, [records, idString, isUpdate]);
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({ ...selected, ...obj });
   };
@@ -54,12 +57,12 @@ const Money = () => {
         id: -1,
         tagIds: [],
         note: "",
-        amount: 0
+        amount: 0,
       });
     }
   };
   return (
-    <div>
+    <Wrapper>
       <MyLayout>
         <CategoryWrapper>
           <CategorySection
@@ -95,7 +98,7 @@ const Money = () => {
           setModalState(false);
         }}
       />
-    </div>
+    </Wrapper>
   );
 };
 export default Money;
